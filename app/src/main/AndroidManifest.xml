@@ -18,7 +18,7 @@
         </activity>
         <activity android:name=".Authentication.Signin" />
         <activity android:name=".Authentication.Signup" />
-        <activity android:name=".WelcomeUser.WelcomeUser"></activity>
+        <activity android:name=".WelcomeUser.WelcomeUser" android:theme="@style/Theme.AppCompat.Light.DarkActionBar"></activity>
     </application>
 
 </manifest>

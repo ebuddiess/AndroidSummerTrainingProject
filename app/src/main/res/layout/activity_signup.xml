@@ -14,6 +14,7 @@
         android:layout_alignParentTop="true">
 
         <RelativeLayout
+            android:id="@+id/relative"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#b6fbfafd">
@@ -31,10 +32,10 @@
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
                     android:background="@drawable/img_border"
+                    android:contentDescription="Signup_logo"
                     android:padding="15dp"
                     android:src="@drawable/register_user"
-                    android:tint="@color/colorWhite"
-                    android:contentDescription="Signup_logo" />
+                    android:tint="@color/colorWhite" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -59,7 +60,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_below="@+id/linearlayout"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="20dp"
@@ -67,6 +68,7 @@
                 android:padding="10dp">
 
                 <EditText
+                    android:id="@+id/signup_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -82,12 +84,13 @@
                     android:textSize="21sp" />
 
                 <EditText
+                    android:id="@+id/signup_mobileno"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:background="@drawable/img_border"
-                    android:drawableStart="@drawable/ic_local_phone_black_24dp"
                     android:drawablePadding="11dp"
+                    android:drawableStart="@drawable/ic_local_phone_black_24dp"
                     android:ems="10"
                     android:hint="Enter Phone Number"
                     android:inputType="phone"
@@ -97,6 +100,7 @@
                     android:textSize="21sp" />
 
                 <EditText
+                    android:id="@+id/signup_pwd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
@@ -105,13 +109,29 @@
                     android:drawablePadding="11dp"
                     android:ems="10"
                     android:hint="Choose Password ....."
-                    android:inputType="textPassword"
                     android:padding="10dp"
                     android:textAlignment="center"
                     android:textColorHint="#000000"
                     android:textSize="21sp" />
 
+
+                <EditText
+                    android:id="@+id/secret_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/img_border"
+                    android:drawableLeft="@drawable/secret_code"
+                    android:drawablePadding="11dp"
+                    android:ems="10"
+                    android:hint="SECRET CODE"
+                    android:padding="10dp"
+                    android:textAlignment="center"
+                    android:textColorHint="#000000"
+                    android:textSize="18sp" />
+
                 <Button
+                    android:id="@+id/signup_btn_from_signup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -128,6 +148,13 @@
                     android:text="Go Back"
                     android:textColor="#fff" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:text="*Enter secret Code to Sign up As Admin"
+                    android:textColor="@color/colorBlack" />
             </LinearLayout>
 
         </RelativeLayout>
