@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "400853155407",
+    "firebase_url": "https://androidsummertrainingproject.firebaseio.com",
+    "project_id": "androidsummertrainingproject",
+    "storage_bucket": "androidsummertrainingproject.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:400853155407:android:1fd981a19eac20d8",
+        "android_client_info": {
+          "package_name": "com.example.ebuddiess.vehiclerentalsystem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "400853155407-lt3e8vvrjheaht39vqsd58qt8c6oj3ll.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ebuddiess.vehiclerentalsystem",
+            "certificate_hash": "afc10142d602158794f5f83e71ae8787ca311dd2"
+          }
+        },
+        {
+          "client_id": "400853155407-sa6tn96991rrmd3rp5saq57j9oo6a6ot.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBBAbjwxAGEJS1Ve2-QyRSLlVH60ZfxoCY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "400853155407-sa6tn96991rrmd3rp5saq57j9oo6a6ot.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@drawable/profile_backround"
+    android:layout_height="190dp"
+    android:padding="10dp"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp">
+
+        <ImageView
+            android:background="@drawable/user_pic"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center"
+            android:layout_width="140dp"
+            android:id="@+id/user_profile_image"
+            android:layout_height="130dp" />
+
+        <TextView
+            android:id="@+id/user_account_balance"
+            android:textAlignment="textEnd"
+            android:layout_alignParentRight="true"
+            android:layout_toRightOf="@id/user_profile_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Balance : 0 Rs"
+            android:textSize="12sp"
+            android:textColor="@color/colorWhite"
+            />
+
+        <TextView
+            android:id="@+id/user_display_name"
+            android:clickable="true"
+            android:layout_below="@id/user_profile_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Log in As Puneet Kumar"
+            android:textSize="16sp"
+            android:textColor="@color/colorWhite"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>
