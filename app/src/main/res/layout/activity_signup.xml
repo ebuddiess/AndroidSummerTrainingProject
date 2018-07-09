@@ -17,7 +17,7 @@
             android:id="@+id/relative"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#b6fbfafd">
+            android:background="#fff">
 
             <LinearLayout
                 android:id="@+id/linearlayout"
@@ -76,6 +76,7 @@
                     android:drawableLeft="@drawable/user_24px"
                     android:drawablePadding="11dp"
                     android:ems="10"
+                    android:textColor="@color/colorBlack"
                     android:hint="Enter email ..."
                     android:inputType="textEmailAddress"
                     android:padding="10dp"
@@ -88,6 +89,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
+                    android:textColor="@color/colorBlack"
                     android:background="@drawable/img_border"
                     android:drawablePadding="11dp"
                     android:drawableStart="@drawable/ic_local_phone_black_24dp"
@@ -100,6 +102,7 @@
                     android:textSize="21sp" />
 
                 <EditText
+                    android:textColor="@color/colorBlack"
                     android:id="@+id/signup_pwd"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -124,6 +127,7 @@
                     android:drawableLeft="@drawable/secret_code"
                     android:drawablePadding="11dp"
                     android:ems="10"
+                    android:textColor="@color/colorBlack"
                     android:hint="SECRET CODE"
                     android:padding="10dp"
                     android:textAlignment="center"

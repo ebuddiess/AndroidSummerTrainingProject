@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:background="@drawable/gradient_bg"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Authentication.Signin">
 
     <ScrollView
@@ -81,14 +82,19 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/selector_button_login"
                 />
-
+             <ProgressBar
+                 android:visibility="invisible"
+                 android:layout_gravity="center"
+                 android:layout_width="30dp"
+                 android:id="@+id/progressbar"
+                 android:layout_height="30dp" />
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Sign up"
                 android:id="@+id/signup_btn_from_login"
                 android:textColor="#fff"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="2dp"
                 android:background="@drawable/selector_signup" />
 
             <TextView
@@ -102,8 +108,6 @@
                 android:layout_height="wrap_content"
                 android:text="Forget Password"
                 android:focusable="true" />
-
         </LinearLayout>
     </ScrollView>
-
 </LinearLayout>

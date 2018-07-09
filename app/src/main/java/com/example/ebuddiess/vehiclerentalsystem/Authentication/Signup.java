@@ -88,7 +88,7 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
                 String userid = user.getUid();
                 newuser = new User(phoneno_txt,user.getEmail(),userid,isAdmin);
                 databaseReference.child(userid).setValue(newuser);
-                Toast.makeText(Signup.this,"Sucesfully Added User",LENGTH_LONG).show();
+                Toast.makeText(Signup.this,"Registered Sucesfully",LENGTH_LONG).show();
                 finish();
                 startActivity(new Intent(Signup.this,Signin.class));
             }else{
