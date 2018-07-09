@@ -78,6 +78,7 @@ ProgressBar progressBar;
                             i1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(i1);
                             progressBar.setVisibility(View.INVISIBLE);
+                            Toast.makeText(Signin.this,"Login Sucessfully", LENGTH_LONG).show();
                         }else{
                             Toast.makeText(Signin.this,task.getException().getMessage().toString(), LENGTH_LONG).show();
                             progressBar.setVisibility(View.INVISIBLE);
