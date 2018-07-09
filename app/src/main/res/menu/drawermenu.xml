@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/EditProfile" android:icon="@drawable/editprofile_icon" android:title="@string/edit_profile"></item>
-    <item android:id="@+id/about" android:title="@string/about"></item>
-    <item android:id="@+id/logout"  android:title="@string/logout"></item>
+    <item android:id="@+id/about" android:title="@string/about" android:icon="@drawable/about_profile"></item>
+    <item android:id="@+id/logout"  android:title="@string/logout" android:icon="@drawable/logout_user"></item>
 
 </menu>
