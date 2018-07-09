@@ -16,6 +16,5 @@
         app:menu="@menu/drawermenu"
         android:layout_gravity="start"
         android:layout_height="match_parent">
-
     </android.support.design.widget.NavigationView>
 </android.support.v4.widget.DrawerLayout>

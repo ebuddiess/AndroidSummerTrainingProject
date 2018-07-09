@@ -3,12 +3,11 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:background="@drawable/profile_backround"
     android:layout_height="190dp"
-    android:padding="10dp"
     >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="180dp">
+        android:layout_height="190dp">
 
         <ImageView
             android:background="@drawable/user_pic"
@@ -27,18 +26,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Balance : 0 Rs"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
             android:textSize="12sp"
             android:textColor="@color/colorWhite"
             />
 
         <TextView
+            android:background="@color/colorBlack"
             android:id="@+id/user_display_name"
             android:clickable="true"
             android:layout_below="@id/user_profile_image"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Log in As Puneet Kumar"
+            android:text="Log in As User"
             android:textSize="16sp"
+            android:gravity="center"
+            android:layout_alignParentBottom="true"
             android:textColor="@color/colorWhite"
             />
 
