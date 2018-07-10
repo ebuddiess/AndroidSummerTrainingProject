@@ -15,28 +15,14 @@
             android:layout_marginBottom="10dp"
             android:layout_gravity="center"
             android:layout_width="140dp"
-            android:id="@+id/user_profile_image"
+            android:id="@+id/user_profile_image_drawer"
             android:layout_height="130dp" />
-
-        <TextView
-            android:id="@+id/user_account_balance"
-            android:textAlignment="textEnd"
-            android:layout_alignParentRight="true"
-            android:layout_toRightOf="@id/user_profile_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Balance : 0 Rs"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="20dp"
-            android:textSize="12sp"
-            android:textColor="@color/colorWhite"
-            />
 
         <TextView
             android:background="@color/purple"
             android:id="@+id/user_display_name"
             android:clickable="true"
-            android:layout_below="@id/user_profile_image"
+            android:layout_below="@id/user_profile_image_drawer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Log in As User"

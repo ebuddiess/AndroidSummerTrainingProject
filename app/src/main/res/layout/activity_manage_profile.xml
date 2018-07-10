@@ -27,6 +27,30 @@
                 android:id="@+id/manage_profile_imageview"
                 android:layout_height="200dp" />
 
+           <RelativeLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+               <ProgressBar
+                   android:visibility="invisible"
+                   android:id="@+id/progressBar_manage_profile"
+                   android:layout_centerHorizontal="true"
+                   android:layout_gravity="center"
+                   android:layout_width="200dp"
+                   android:max="100"
+                   android:layout_height="20dp" />
+
+                <TextView
+                    android:visibility="invisible"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0%"
+                    android:id="@+id/progressbarStatus_manage_profile"
+                    android:layout_centerHorizontal="true"
+                   android:layout_below="@id/progressBar_manage_profile"
+                    />
+
+           </RelativeLayout>
+
             <Button
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
@@ -34,6 +58,7 @@
                 android:background="@drawable/btn_background_signup"
                 android:textColor="@color/colorWhite"
                 android:layout_marginBottom="7dp"
+                android:layout_marginTop="15dp"
                 android:id="@+id/manage_profile_edit_image_button"
                 android:text="Edit"
                 android:layout_below="@id/manage_profile_imageview"
