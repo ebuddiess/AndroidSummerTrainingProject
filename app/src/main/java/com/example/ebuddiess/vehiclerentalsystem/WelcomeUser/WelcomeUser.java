@@ -16,18 +16,16 @@ import com.example.ebuddiess.vehiclerentalsystem.ManageProfile.ManageProfile;
 import com.example.ebuddiess.vehiclerentalsystem.R;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class WelcomeUser extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
+public class WelcomeUser extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 NavigationView user_nav_view;
 FirebaseAuth currentUser;
-CardView manageProfile;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_user);
         user_nav_view = (NavigationView)findViewById(R.id.user_navigation_view);
         currentUser = FirebaseAuth.getInstance();
-        manageProfile = (CardView)findViewById(R.id.manager_profile_cardView);
-        manageProfile.setOnClickListener(this);
         user_nav_view.setNavigationItemSelectedListener(this);
     }
 
@@ -35,8 +33,13 @@ CardView manageProfile;
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.logout:doLogout();
+            case R.id.user_EditProfile:openmanageProfile();
         }
         return true;
+    }
+
+    private void openmanageProfile() {
+    startActivity(new Intent(WelcomeUser.this,ManageProfile.class));
     }
 
     private void doLogout() {
@@ -46,10 +49,5 @@ CardView manageProfile;
         startActivity(new Intent(WelcomeUser.this, Signin.class));
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.manager_profile_cardView:startActivity(new Intent(WelcomeUser.this,ManageProfile.class));
-        }
-    }
+
 }

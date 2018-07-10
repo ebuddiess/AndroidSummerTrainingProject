@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:background="@color/colorBlack"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select From Camera"
+        android:id="@+id/select_from_camera_btn"
+        />
+
+    <Button
+        android:layout_below="@+id/select_from_camera_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Select From Gallery"
+        android:id="@+id/select_from_gallery_btn"
+        />
+    <Button
+        android:layout_below="@+id/select_from_gallery_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Close"
+        android:id="@+id/close_pop_up"
+        />
+</RelativeLayout>
