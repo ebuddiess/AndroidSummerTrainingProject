@@ -3,7 +3,9 @@ package com.example.ebuddiess.vehiclerentalsystem.Authentication;
 public class User {
     String firstname,lastname,displayname,profileurl,mobileno,emailadress,userid;
     boolean isAdmin;
+    User(){
 
+    }
     public User(String firstname, String lastname, String displayname, String profileurl, String mobileno, String emailadress, String userid, boolean isAdmin) {
         this.firstname = firstname;
         this.lastname = lastname;

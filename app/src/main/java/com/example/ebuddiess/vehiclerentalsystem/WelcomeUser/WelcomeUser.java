@@ -34,14 +34,6 @@ ImageView user_profile_image_drawer;
         user_profile_image_drawer = (ImageView)findViewById(R.id.user_profile_image_drawer);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        String path = new UserprofileSharedPrefernces(this).getProfilePath();
-        if(path!=""){
-            Glide.with(WelcomeUser.this).load(R.drawable.active_dots).apply(new RequestOptions().centerCrop()).into(user_profile_image_drawer);
-        }
-    }
 
 
     @Override

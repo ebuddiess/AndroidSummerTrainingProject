@@ -80,7 +80,7 @@
            android:textAlignment="center"
            android:textColor="@color/colorBlack"
            android:hint="First Name"
-           android:id="@+id/manage_profile_first_name"
+           android:id="@+id/manageProfilefirstname"
            android:background="@drawable/img_border"
            android:textColorHint="@color/colorBlack"
            />
@@ -93,7 +93,7 @@
            android:textAlignment="center"
            android:textColor="@color/colorBlack"
            android:hint="Last Name"
-           android:id="@+id/manage_profile_last_name"
+           android:id="@+id/manageprofilelast_name"
            android:background="@drawable/img_border"
            android:textColorHint="@color/colorBlack"
            />
@@ -106,7 +106,7 @@
            android:textAlignment="center"
            android:textColor="@color/colorBlack"
            android:hint="Display Name"
-           android:id="@+id/manage_profile_display_name"
+           android:id="@+id/manageprofiledisplay_name"
            android:background="@drawable/img_border"
            android:textColorHint="@color/colorBlack"
            />
@@ -120,7 +120,7 @@
            android:textColor="@color/colorBlack"
            android:hint="Mobile Number"
            android:inputType="phone"
-           android:id="@+id/manage_profile_mobile_no"
+           android:id="@+id/manageprofilemobile_no"
            android:background="@drawable/img_border"
            android:textColorHint="@color/colorBlack"
            />
