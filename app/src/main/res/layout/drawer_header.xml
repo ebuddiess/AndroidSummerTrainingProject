@@ -20,7 +20,7 @@
 
         <TextView
             android:background="@color/purple"
-            android:id="@+id/user_display_name"
+            android:id="@+id/user_display_name_drawer"
             android:clickable="true"
             android:layout_below="@id/user_profile_image_drawer"
             android:layout_width="match_parent"

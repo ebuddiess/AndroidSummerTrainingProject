@@ -24,6 +24,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.ebuddiess.vehiclerentalsystem.Authentication.User;
 import com.example.ebuddiess.vehiclerentalsystem.R;
+import com.example.ebuddiess.vehiclerentalsystem.WelcomeUser.WelcomeUser;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -57,6 +58,7 @@ File user_profile_image_secret;
 TextView progressBarstatus;
 int Camera_code;
 String imageName;
+String uid;
 Button saveButton;
 DatabaseReference databaseReference; StorageReference storageReference; FirebaseAuth currentUser;
 @Override
@@ -67,7 +69,6 @@ DatabaseReference databaseReference; StorageReference storageReference; Firebase
         StrictMode.setVmPolicy(builder.build());
         edit_profile_open_popup = (Button)findViewById(R.id.manage_profile_edit_image_button);
         image_select_dialog = new Dialog(this);
-        currentUser = FirebaseAuth.getInstance();
         saveButton = (Button)findViewById(R.id.manage_profile_save_btn);
         progressBarstatus = (TextView)findViewById(R.id.progressbarStatus_manage_profile);
         progressBar = (ProgressBar)findViewById(R.id.progressBar_manage_profile);
@@ -82,6 +83,8 @@ DatabaseReference databaseReference; StorageReference storageReference; Firebase
         lastName_manageProfile = (EditText)findViewById(R.id.manageprofilelast_name);
         display_name_manageprofile=(EditText)findViewById(R.id.manageprofiledisplay_name);
         mobile_no_manage_profile = (EditText)findViewById(R.id.manageprofilemobile_no);
+        currentUser = FirebaseAuth.getInstance();
+        uid = currentUser.getUid();
         // ------------------------------------------------------------------ //
         edit_profile_open_popup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,9 +96,12 @@ DatabaseReference databaseReference; StorageReference storageReference; Firebase
                 close_popup.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        if(image_uri_data==null){
+                            image_select_dialog.dismiss();
+                        }else{
                         image_select_dialog.dismiss();
                         uploadFile();
-                    }
+                    }}
                 });
 
                 image_select_dialog.show();
@@ -176,13 +182,13 @@ DatabaseReference databaseReference; StorageReference storageReference; Firebase
     @Override
     protected void onStart() {
         super.onStart();
-        String path = new UserprofileSharedPrefernces(this).getProfilePath();
+        String path = new UserprofileSharedPrefernces(this,currentUser.getUid()).getProfilePath();
         if(path!=""){
             Glide.with(ManageProfile.this).load(path).apply(new RequestOptions().centerCrop()).into(manage_profile_image_view);
         }
 
-        DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid());
-        firebaseDatabase.addValueEventListener(new ValueEventListener() {
+           DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid());
+           firebaseDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
             firstname_manageproofile.setText(dataSnapshot.child("firstname").getValue().toString());
@@ -219,14 +225,14 @@ DatabaseReference databaseReference; StorageReference storageReference; Firebase
                 @Override
                 public void onSuccess(Uri uri) {
                 image_download_url_uri = uri;
-                String uid = currentUser.getUid();
+                final String uid = currentUser.getUid();
                 databaseReference.child(uid).child("profileurl").setValue(image_download_url_uri.toString());
                 try{
                    user_profile_image_secret = File.createTempFile(PROFILE_PIC_SECRET_FILE,"jpg");
                    storageReference.getFile(user_profile_image_secret).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                        @Override
                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                       UserprofileSharedPrefernces userprofileSharedPrefernces = new UserprofileSharedPrefernces(ManageProfile.this);
+                       UserprofileSharedPrefernces userprofileSharedPrefernces = new UserprofileSharedPrefernces(ManageProfile.this,currentUser.getUid());
                        userprofileSharedPrefernces.SaveProfilePic(user_profile_image_secret.getPath());
                        String path = userprofileSharedPrefernces.getProfilePath();
                        Glide.with(ManageProfile.this).load(path).apply(new RequestOptions().centerCrop()).into(manage_profile_image_view);

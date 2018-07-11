@@ -48,7 +48,7 @@ ProgressBar progressBar;
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         if(mAuth.getCurrentUser()!=null){
             finish();
-            startActivity(new Intent(Signin.this,WelcomeUser.class));
+            startActivity(new Intent(Signin.this,WelcomeUser.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         }
     }
 

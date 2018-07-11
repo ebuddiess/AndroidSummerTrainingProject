@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.ebuddiess.vehiclerentalsystem.IntroSlider.MainActivity;
 import com.example.ebuddiess.vehiclerentalsystem.R;
 import com.example.ebuddiess.vehiclerentalsystem.WelcomeUser.WelcomeUser;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,6 +30,7 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
     EditText email_txt,pwd_txt,secretcode,mobile_no;
     DatabaseReference databaseReference;
     FirebaseAuth firebaseAuth;
+    String isAdmin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,9 +60,12 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
         String phoneno_txt = mobile_no.getText().toString();
         String secretcode_txt = secretcode.getText().toString();
         int pwdlength = passwordtxt.length();
-        boolean isAdmin = false;
+        isAdmin = "false";
         /* checking if values are empty or not */
-            if(emailAdresstxt.isEmpty()){
+         if(secretcode_txt.equals("123")){
+            isAdmin = "true";
+             Toast.makeText(Signup.this,"YOU ARE A ADMIN ",LENGTH_LONG).show();
+         } if(emailAdresstxt.isEmpty()){
                 email_txt.setError("Email Adress is Empty");
             }else if(passwordtxt.isEmpty()){
                 pwd_txt.setError("Please Fill Password");
@@ -70,16 +75,14 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
             mobile_no.setError("Invalid Mobile Number");
             }else if(pwdlength<=6){
                 pwd_txt.setError("Password Must be 7 chracter Long");
-            }else if(secretcode_txt=="123"){
-                isAdmin = true;
-            }else {
+            } else {
                 createNewUser(emailAdresstxt,passwordtxt,phoneno_txt,secretcode_txt,isAdmin);
             }
 
 
     }
 
-    private void createNewUser(String emailAdresstxt, String passwordtxt, final String phoneno_txt, String secretcode_txt, final boolean isAdmin) {
+    private void createNewUser(String emailAdresstxt, String passwordtxt, final String phoneno_txt, String secretcode_txt, final String isAdmin) {
       firebaseAuth.createUserWithEmailAndPassword(emailAdresstxt,passwordtxt).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
           @Override
           public void onComplete(@NonNull Task<AuthResult> task) {

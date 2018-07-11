@@ -2,11 +2,11 @@ package com.example.ebuddiess.vehiclerentalsystem.Authentication;
 
 public class User {
     String firstname,lastname,displayname,profileurl,mobileno,emailadress,userid;
-    boolean isAdmin;
+    String isAdmin;
     User(){
 
     }
-    public User(String firstname, String lastname, String displayname, String profileurl, String mobileno, String emailadress, String userid, boolean isAdmin) {
+    public User(String firstname, String lastname, String displayname, String profileurl, String mobileno, String emailadress, String userid, String isAdmin) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.displayname = displayname;
@@ -17,7 +17,7 @@ public class User {
         this.isAdmin = isAdmin;
     }
 
-    public User(String mobileno, String emailadress, String userid, boolean isAdmin) {
+    public User(String mobileno, String emailadress, String userid, String isAdmin) {
         this.mobileno = mobileno;
         this.emailadress = emailadress;
         this.userid = userid;
@@ -84,11 +84,11 @@ public class User {
         this.userid = userid;
     }
 
-    public boolean isAdmin() {
+    public String isAdmin() {
         return isAdmin;
     }
 
-    public void setAdmin(boolean admin) {
+    public void setAdmin(String admin) {
         isAdmin = admin;
     }
 }

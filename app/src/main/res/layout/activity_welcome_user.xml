@@ -19,7 +19,6 @@
         app:itemIconTint="@color/colorWhite"
         android:background="@color/colorBlack"
         app:itemTextColor="@color/colorWhite"
-        app:headerLayout="@layout/drawer_header"
         app:menu="@menu/drawermenu"
         android:layout_gravity="start"
         android:layout_height="match_parent">

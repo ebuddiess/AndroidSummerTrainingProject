@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -19,10 +20,25 @@ import com.example.ebuddiess.vehiclerentalsystem.ManageProfile.ManageProfile;
 import com.example.ebuddiess.vehiclerentalsystem.ManageProfile.UserprofileSharedPrefernces;
 import com.example.ebuddiess.vehiclerentalsystem.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.StorageReference;
+
+import static android.view.View.INVISIBLE;
 
 public class WelcomeUser extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 NavigationView user_nav_view;
 FirebaseAuth currentUser;
+View headerView;
+TextView username;
+String firstname;
+Menu menu;
+String isAdmin;
+DatabaseReference firebaseDatabase;
+MenuItem manageCars;
 ImageView user_profile_image_drawer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +47,26 @@ ImageView user_profile_image_drawer;
         user_nav_view = (NavigationView)findViewById(R.id.user_navigation_view);
         currentUser = FirebaseAuth.getInstance();
         user_nav_view.setNavigationItemSelectedListener(this);
-        user_profile_image_drawer = (ImageView)findViewById(R.id.user_profile_image_drawer);
+        firebaseDatabase = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid());
+        headerView = user_nav_view.inflateHeaderView(R.layout.drawer_header);
+        menu = user_nav_view.getMenu();
+        username =(TextView) headerView.findViewById(R.id.user_display_name_drawer);
+        manageCars = (MenuItem) menu.findItem(R.id.manageCars);
+        firebaseDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                isAdmin =  dataSnapshot.child("isAdmin").getValue().toString();
+                if(isAdmin.equals("true")){
+                    manageCars.setVisible(true);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        user_profile_image_drawer = (ImageView)headerView.findViewById(R.id.user_profile_image_drawer);
     }
 
 
@@ -50,11 +85,38 @@ ImageView user_profile_image_drawer;
     }
 
     private void doLogout() {
-        Toast.makeText(WelcomeUser.this,"Logout Sucessfully",Toast.LENGTH_LONG).show();
-        currentUser.signOut();
-        finish();
-        startActivity(new Intent(WelcomeUser.this, Signin.class));
+        try{
+            Toast.makeText(WelcomeUser.this,"Logout Sucessfully",Toast.LENGTH_LONG).show();
+            finish();
+            startActivity(new Intent(WelcomeUser.this, Signin.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            currentUser.signOut();
+        }catch (Exception e){
+            Toast.makeText(WelcomeUser.this,e.getMessage().toString(),Toast.LENGTH_LONG).show();
+        }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        String uid = currentUser.getUid();
+        DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid());
+        firebaseDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                firstname = dataSnapshot.child("firstname").getValue().toString();
+                if(!firstname.isEmpty()){
+                    String profileurl= dataSnapshot.child("profileurl").getValue().toString();
+                    username.setText("Login as "+firstname);
+                    Glide.with(WelcomeUser.this).load(profileurl).into(user_profile_image_drawer);
+                }else if(firstname.isEmpty()){
+                    username.setText("Log in As User");
+                }
+                }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
 }

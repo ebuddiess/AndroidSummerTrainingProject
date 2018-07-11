@@ -3,4 +3,5 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="logout">Logout</string>
     <string name="about">About</string>
+    <string name="manage_cars">Manage Cars</string>
 </resources>

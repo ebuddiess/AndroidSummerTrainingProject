@@ -6,7 +6,7 @@ import android.widget.ImageView;
 
 public class UserprofileSharedPrefernces {
     Context context;
-    final String IMAGEURL = "profilepic_url";
+    String USERUID = "";
     final String PROFILE_PATH = "profilepath";
     SharedPreferences sharedPreferences;
 
@@ -14,9 +14,10 @@ public class UserprofileSharedPrefernces {
 
     }
 
-    public UserprofileSharedPrefernces(Context context) {
+    public UserprofileSharedPrefernces(Context context,String uid) {
         this.context = context;
-        sharedPreferences = context.getSharedPreferences(IMAGEURL,Context.MODE_PRIVATE);
+        this.USERUID = uid;
+        sharedPreferences = context.getSharedPreferences(USERUID,Context.MODE_PRIVATE);
     }
 
     void SaveProfilePic(String path){
