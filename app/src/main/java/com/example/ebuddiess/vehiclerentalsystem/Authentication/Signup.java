@@ -64,8 +64,9 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
         /* checking if values are empty or not */
          if(secretcode_txt.equals("123")){
             isAdmin = "true";
-             Toast.makeText(Signup.this,"YOU ARE A ADMIN ",LENGTH_LONG).show();
-         } if(emailAdresstxt.isEmpty()){
+         }
+
+         if(emailAdresstxt.isEmpty()){
                 email_txt.setError("Email Adress is Empty");
             }else if(passwordtxt.isEmpty()){
                 pwd_txt.setError("Please Fill Password");
