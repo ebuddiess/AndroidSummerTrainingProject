@@ -4,4 +4,16 @@
     <string name="logout">Logout</string>
     <string name="about">About</string>
     <string name="manage_cars">Manage Cars</string>
+    <array name="car_category">
+        <item>CAR CATEGORY</item>
+        <item>Hatchback</item>
+        <item>SUV</item>
+        <item>compact</item>
+    </array>
+    <array name="fueltype">
+        <item>FUEL TYPE</item>
+        <item>PETROL</item>
+        <item>DIESEL</item>
+        <item>CNG</item>
+    </array>
 </resources>

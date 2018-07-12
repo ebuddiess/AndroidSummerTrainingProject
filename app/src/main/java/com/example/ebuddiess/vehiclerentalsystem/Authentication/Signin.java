@@ -18,6 +18,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static android.widget.Toast.LENGTH_LONG;
 
@@ -27,6 +35,9 @@ TextView forgetPassword;
 FirebaseAuth Authentication;
 EditText email_txt,pwd_txt;
 ProgressBar progressBar;
+DatabaseReference databaseReference;
+FirebaseAuth currentUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,15 +49,38 @@ ProgressBar progressBar;
         forgetPassword = (TextView)findViewById(R.id.forgetpassword);
         email_txt = (EditText)findViewById(R.id.signin_email);
         pwd_txt  = (EditText)findViewById(R.id.signin_pwd);
+        currentUser = FirebaseAuth.getInstance();
         signup.setOnClickListener(this);
         login.setOnClickListener(this);
+
+        if(currentUser.getCurrentUser()!=null){
+            databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid());
+            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String isAdmin =  dataSnapshot.child("adminPower").getValue().toString();
+                    if(isAdmin==null){
+                        String isAdminfromIntent = getIntent().getStringExtra("isAdmin");
+                        Map<String,Object> taskMap = new HashMap<String,Object>();
+                        taskMap.put("adminPower",isAdminfromIntent);
+                        databaseReference.updateChildren(taskMap);
+                        Toast.makeText(Signin.this,"Admin Created", LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        if(mAuth.getCurrentUser()!=null){
+        if(currentUser.getCurrentUser()!=null){
             finish();
             startActivity(new Intent(Signin.this,WelcomeUser.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         }

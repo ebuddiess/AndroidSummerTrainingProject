@@ -77,24 +77,25 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
             }else if(pwdlength<=6){
                 pwd_txt.setError("Password Must be 7 chracter Long");
             } else {
-                createNewUser(emailAdresstxt,passwordtxt,phoneno_txt,secretcode_txt,isAdmin);
+                createNewUser(emailAdresstxt,passwordtxt,phoneno_txt,isAdmin);
             }
 
 
     }
 
-    private void createNewUser(String emailAdresstxt, String passwordtxt, final String phoneno_txt, String secretcode_txt, final String isAdmin) {
+    private void createNewUser(String emailAdresstxt, String passwordtxt, final String phoneno_text, final String isAdmin) {
       firebaseAuth.createUserWithEmailAndPassword(emailAdresstxt,passwordtxt).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
           @Override
           public void onComplete(@NonNull Task<AuthResult> task) {
+            String phoneno=phoneno_text;
             if(task.isSuccessful()){
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 String userid = user.getUid();
-                newuser = new User(phoneno_txt,user.getEmail(),userid,isAdmin);
+                newuser = new User(phoneno,user.getEmail(),userid,isAdmin);
                 databaseReference.child(userid).setValue(newuser);
                 Toast.makeText(Signup.this,"Registered Sucesfully",LENGTH_LONG).show();
                 finish();
-                startActivity(new Intent(Signup.this,Signin.class));
+                startActivity(new Intent(Signup.this,Signin.class).putExtra("isAdmin",isAdmin));
             }else{
                 if(task.getException() instanceof FirebaseAuthUserCollisionException){
                     Toast.makeText(Signup.this,"Already Registered", LENGTH_LONG).show();

@@ -1,27 +1,16 @@
 package com.example.ebuddiess.vehiclerentalsystem.Authentication;
 
 public class User {
-    String firstname,lastname,displayname,profileurl,mobileno,emailadress,userid;
-    String isAdmin;
+    String firstname,lastname,displayname,profileurl,mobileno,emailadress,userid ,adminPower;
     User(){
 
     }
-    public User(String firstname, String lastname, String displayname, String profileurl, String mobileno, String emailadress, String userid, String isAdmin) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.displayname = displayname;
-        this.profileurl = profileurl;
-        this.mobileno = mobileno;
-        this.emailadress = emailadress;
-        this.userid = userid;
-        this.isAdmin = isAdmin;
-    }
 
-    public User(String mobileno, String emailadress, String userid, String isAdmin) {
+    public User(String mobileno, String emailadress, String userid, String adminPower) {
         this.mobileno = mobileno;
         this.emailadress = emailadress;
         this.userid = userid;
-        this.isAdmin = isAdmin;
+        this.adminPower = adminPower;
         firstname = "";
         displayname = "";
         lastname = "";
@@ -84,11 +73,4 @@ public class User {
         this.userid = userid;
     }
 
-    public String isAdmin() {
-        return isAdmin;
-    }
-
-    public void setAdmin(String admin) {
-        isAdmin = admin;
-    }
 }

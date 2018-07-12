@@ -1,9 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ManageCars.manageCar">
+    android:orientation="vertical"
+    tools:context=".ManageCars.ManageCar">
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:padding="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/car2"
+        android:id="@+id/car_image"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:padding="17dp"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:layout_marginTop="20dp"
+            android:background="@drawable/car_edittext_background"
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:textColorHint="@color/colorBlack"
+            android:layout_height="wrap_content"
+            android:hint="CAR NAME"
+            android:layout_marginBottom="8dp"
+            android:id="@+id/car_name"
+            />
+
+        <Spinner
+            android:entries="@array/car_category"
+            android:background="@drawable/car_edittext_background"
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:textColorHint="@color/colorBlack"
+            android:layout_height="wrap_content"
+            android:hint="CAR NAME"
+            android:layout_marginBottom="8dp"
+            android:id="@+id/car_category"
+            />
+
+        <Spinner
+            android:background="@drawable/car_edittext_background"
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:textSize="20sp"
+            android:layout_marginBottom="8dp"
+            android:textAlignment="center"
+            android:textColorHint="@color/colorBlack"
+            android:layout_height="wrap_content"
+            android:entries="@array/fueltype"
+            android:id="@+id/fuel_type"
+            />
+
+        <TextView
+            android:background="@drawable/car_edittext_background"
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:textColorHint="@color/colorBlack"
+            android:layout_height="wrap_content"
+            android:text="SEATING CAPACITY"
+            android:textColor="@color/colorBlack"
+            android:layout_marginBottom="8dp"
+            android:id="@+id/seating_capactiy"
+            />
+        <TextView
+            android:background="@drawable/car_edittext_background"
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:textColorHint="@color/colorBlack"
+            android:layout_height="wrap_content"
+            android:text="PRICE PER DAY "
+            android:textColor="@color/colorBlack"
+            android:layout_marginBottom="8dp"
+            android:id="@+id/car_seat_price"
+            />
+
+        <Button
+            android:background="@drawable/btn_background_signup"
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:textColorHint="@color/colorBlack"
+            android:layout_height="wrap_content"
+            android:text="SELECT IMAGE"
+            android:textColor="@color/colorBlack"
+            android:layout_marginBottom="8dp"
+            android:id="@+id/select_car_image"
+            />
+
+        <Button
+            android:background="@drawable/btn_background_signup"
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:textColorHint="@color/colorBlack"
+            android:layout_height="wrap_content"
+            android:text="Upload Car"
+            android:textColor="@color/colorBlack"
+            android:layout_marginBottom="8dp"
+            android:id="@+id/save_car_data"
+            />
+
+    </LinearLayout>
+
+</LinearLayout>

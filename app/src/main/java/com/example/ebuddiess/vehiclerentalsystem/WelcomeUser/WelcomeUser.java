@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.ebuddiess.vehiclerentalsystem.Authentication.Signin;
+import com.example.ebuddiess.vehiclerentalsystem.IntroSlider.MainActivity;
+import com.example.ebuddiess.vehiclerentalsystem.ManageCars.ManageCar;
 import com.example.ebuddiess.vehiclerentalsystem.ManageProfile.ManageProfile;
 import com.example.ebuddiess.vehiclerentalsystem.ManageProfile.UserprofileSharedPrefernces;
 import com.example.ebuddiess.vehiclerentalsystem.R;
@@ -55,8 +57,9 @@ ImageView user_profile_image_drawer;
         firebaseDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                isAdmin =  dataSnapshot.child("isAdmin").getValue().toString();
+                isAdmin =  dataSnapshot.child("adminPower").getValue().toString();
                 if(isAdmin.equals("true")){
+//                    Toast.makeText(WelcomeUser.this,isAdmin,Toast.LENGTH_LONG).show();
                     manageCars.setVisible(true);
                 }
             }
@@ -67,6 +70,8 @@ ImageView user_profile_image_drawer;
             }
         });
         user_profile_image_drawer = (ImageView)headerView.findViewById(R.id.user_profile_image_drawer);
+        user_profile_image_drawer.setBackgroundResource(android.R.color.transparent);
+
     }
 
 
@@ -74,10 +79,15 @@ ImageView user_profile_image_drawer;
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
-            case R.id.logout:doLogout();
-            case R.id.user_EditProfile:openmanageProfile();
+            case R.id.logout:doLogout();break;
+            case R.id.user_EditProfile:openmanageProfile();break;
+            case R.id.manageCars:openmanageCars();break;
         }
         return true;
+    }
+
+    private void openmanageCars() {
+       startActivity(new Intent(WelcomeUser.this,ManageCar.class));
     }
 
     private void openmanageProfile() {
@@ -86,10 +96,10 @@ ImageView user_profile_image_drawer;
 
     private void doLogout() {
         try{
-            Toast.makeText(WelcomeUser.this,"Logout Sucessfully",Toast.LENGTH_LONG).show();
             finish();
-            startActivity(new Intent(WelcomeUser.this, Signin.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             currentUser.signOut();
+            Toast.makeText(WelcomeUser.this,"Logout Sucessfully",Toast.LENGTH_LONG).show();
+            startActivity(new Intent(WelcomeUser.this, Signin.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
         }catch (Exception e){
             Toast.makeText(WelcomeUser.this,e.getMessage().toString(),Toast.LENGTH_LONG).show();
         }
@@ -107,7 +117,7 @@ ImageView user_profile_image_drawer;
                 if(!firstname.isEmpty()){
                     String profileurl= dataSnapshot.child("profileurl").getValue().toString();
                     username.setText("Login as "+firstname);
-                    Glide.with(WelcomeUser.this).load(profileurl).into(user_profile_image_drawer);
+                    Glide.with(WelcomeUser.this).load(profileurl).apply(new RequestOptions().centerCrop()).into(user_profile_image_drawer);
                 }else if(firstname.isEmpty()){
                     username.setText("Log in As User");
                 }
