@@ -1,5 +1,6 @@
 package com.example.ebuddiess.vehiclerentalsystem.WelcomeUser;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -9,8 +10,13 @@ import android.support.v7.widget.CardView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TabHost;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -29,26 +35,55 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 
+import java.sql.Time;
+import java.util.Date;
+
 import static android.view.View.INVISIBLE;
 
-public class WelcomeUser extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class WelcomeUser extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 NavigationView user_nav_view;
 FirebaseAuth currentUser;
 View headerView;
+DatePicker datePicker;
+TimePicker timePicker;
 TextView username;
+Dialog selectdateandtime;
 String firstname;
 Menu menu;
 String isAdmin;
+Button selectdate,selectTime;
+EditText start_time;
 DatabaseReference firebaseDatabase;
 MenuItem manageCars;
+TabHost tabHost;
+TabHost.TabSpec spec;
 ImageView user_profile_image_drawer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_user);
         user_nav_view = (NavigationView)findViewById(R.id.user_navigation_view);
+        selectdateandtime = new Dialog(this);
+        selectdateandtime.setContentView(R.layout.custom_datetime_picker);
+        tabHost = (TabHost)selectdateandtime.findViewById(R.id.tabHost);
+        tabHost.setup();
+//        tab1
+        spec = tabHost.newTabSpec("DATE");
+        spec.setContent(R.id.tab1);
+        spec.setIndicator("DATE");
+        tabHost.addTab(spec);
+//        tab2
+        spec = tabHost.newTabSpec("TIME");
+        spec.setContent(R.id.tab2);
+        spec.setIndicator("TIME");
+        tabHost.addTab(spec);
+//        -------------------------------------------------------------------------
         currentUser = FirebaseAuth.getInstance();
         user_nav_view.setNavigationItemSelectedListener(this);
+        selectdate = (Button)selectdateandtime.findViewById(R.id.select_date_from_datepicker);
+        selectTime  = (Button)selectdateandtime.findViewById(R.id.select_time_from_time_picker);
+        datePicker  = (DatePicker)selectdateandtime.findViewById(R.id.datepicker);
+        timePicker  = (TimePicker)selectdateandtime.findViewById(R.id.timepicker);
         firebaseDatabase = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid());
         headerView = user_nav_view.inflateHeaderView(R.layout.drawer_header);
         menu = user_nav_view.getMenu();
@@ -71,7 +106,10 @@ ImageView user_profile_image_drawer;
         });
         user_profile_image_drawer = (ImageView)headerView.findViewById(R.id.user_profile_image_drawer);
         user_profile_image_drawer.setBackgroundResource(android.R.color.transparent);
-
+        start_time = (EditText)findViewById(R.id.start_time_edtText);
+        start_time.setOnClickListener(this);
+        selectdate.setOnClickListener(this);
+        selectTime.setOnClickListener(this);
     }
 
 
@@ -128,5 +166,14 @@ ImageView user_profile_image_drawer;
 
             }
         });
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()){
+            case R.id.start_time_edtText:selectdateandtime.show();break;
+            case R.id.select_date_from_datepicker:
+            case R.id.select_time_from_time_picker:break;
+        }
     }
 }

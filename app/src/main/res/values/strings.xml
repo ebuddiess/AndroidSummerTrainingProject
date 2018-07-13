@@ -16,4 +16,10 @@
         <item>DIESEL</item>
         <item>CNG</item>
     </array>
+
+    <array name="city">
+        <item>Delhi</item>
+        <item>Mumbai</item>
+    </array>
+
 </resources>

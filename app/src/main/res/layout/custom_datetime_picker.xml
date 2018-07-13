@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TabHost
+        android:id="@+id/tabHost"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <TabWidget
+                android:layout_width="match_parent"
+                android:id="@android:id/tabs"
+                android:layout_height="wrap_content">
+            </TabWidget>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:id="@android:id/tabcontent"
+                android:layout_height="match_parent">
+
+                <!--tab1-->
+
+                <LinearLayout
+                    android:id="@+id/tab1"
+                    android:background="#87fde2d2"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+
+                    <DatePicker
+                        android:layout_width="match_parent"
+                        android:id="@+id/datepicker"
+                        android:layout_height="470dp">
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <Button
+                                android:id="@+id/select_date_from_datepicker"
+                                android:layout_centerHorizontal="true"
+                                android:layout_alignParentBottom="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorWhite"
+                                android:background="@color/lovelyred"
+                                android:layout_gravity="center"
+                                android:text="SELECT" />
+                        </RelativeLayout>
+
+                    </DatePicker>
+                </LinearLayout>
+
+                <!--tab2-->
+
+                <LinearLayout
+                    android:id="@+id/tab2"
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:background="@color/lovelyred"
+                    android:layout_height="400dp">
+
+                    <TimePicker
+                        android:id="@+id/timepicker"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <Button
+                                android:id="@+id/select_time_from_time_picker"
+                                android:layout_centerHorizontal="true"
+                                android:layout_alignParentBottom="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/colorWhite"
+                                android:background="@color/lovelyred"
+                                android:layout_gravity="center"
+                                android:text="SELECT" />
+                        </RelativeLayout>
+                    </TimePicker>
+
+                </LinearLayout>
+
+
+            </FrameLayout>
+
+        </LinearLayout>
+    </TabHost>
+
+</LinearLayout>
