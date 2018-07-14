@@ -93,6 +93,7 @@
                     android:clickable="true"
                     android:drawableLeft="@drawable/date"
                     android:padding="10dp"
+                    android:id="@+id/end_time_edtTxt"
                     android:background="@drawable/img_border"
                     android:drawablePadding="10dp"
                     android:layout_width="match_parent"

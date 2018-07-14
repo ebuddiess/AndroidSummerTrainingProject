@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,10 +21,8 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.ebuddiess.vehiclerentalsystem.Authentication.Signin;
-import com.example.ebuddiess.vehiclerentalsystem.IntroSlider.MainActivity;
 import com.example.ebuddiess.vehiclerentalsystem.ManageCars.ManageCar;
 import com.example.ebuddiess.vehiclerentalsystem.ManageProfile.ManageProfile;
-import com.example.ebuddiess.vehiclerentalsystem.ManageProfile.UserprofileSharedPrefernces;
 import com.example.ebuddiess.vehiclerentalsystem.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -33,12 +30,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.StorageReference;
 
-import java.sql.Time;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import static android.view.View.INVISIBLE;
+import java.util.GregorianCalendar;
 
 public class WelcomeUser extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 NavigationView user_nav_view;
@@ -48,24 +43,28 @@ DatePicker datePicker;
 TimePicker timePicker;
 TextView username;
 Dialog selectdateandtime;
+StartTime customPicker;
 String firstname;
 Menu menu;
 String isAdmin;
 Button selectdate,selectTime;
-EditText start_time;
+int COUNTER;
+EditText start_time,end_time;
 DatabaseReference firebaseDatabase;
 MenuItem manageCars;
 TabHost tabHost;
+EndTime customEndPicker;
+String startimeSelecteddate,starttimeselectedtime;
 TabHost.TabSpec spec;
 ImageView user_profile_image_drawer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_user);
-        user_nav_view = (NavigationView)findViewById(R.id.user_navigation_view);
+        user_nav_view = findViewById(R.id.user_navigation_view);
         selectdateandtime = new Dialog(this);
         selectdateandtime.setContentView(R.layout.custom_datetime_picker);
-        tabHost = (TabHost)selectdateandtime.findViewById(R.id.tabHost);
+        tabHost = selectdateandtime.findViewById(R.id.tabHost);
         tabHost.setup();
 //        tab1
         spec = tabHost.newTabSpec("DATE");
@@ -80,15 +79,15 @@ ImageView user_profile_image_drawer;
 //        -------------------------------------------------------------------------
         currentUser = FirebaseAuth.getInstance();
         user_nav_view.setNavigationItemSelectedListener(this);
-        selectdate = (Button)selectdateandtime.findViewById(R.id.select_date_from_datepicker);
-        selectTime  = (Button)selectdateandtime.findViewById(R.id.select_time_from_time_picker);
-        datePicker  = (DatePicker)selectdateandtime.findViewById(R.id.datepicker);
-        timePicker  = (TimePicker)selectdateandtime.findViewById(R.id.timepicker);
+        selectdate = selectdateandtime.findViewById(R.id.select_date_from_datepicker);
+        selectTime  = selectdateandtime.findViewById(R.id.select_time_from_time_picker);
+        datePicker  = selectdateandtime.findViewById(R.id.datepicker);
+        timePicker  = selectdateandtime.findViewById(R.id.timepicker);
         firebaseDatabase = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid());
         headerView = user_nav_view.inflateHeaderView(R.layout.drawer_header);
         menu = user_nav_view.getMenu();
-        username =(TextView) headerView.findViewById(R.id.user_display_name_drawer);
-        manageCars = (MenuItem) menu.findItem(R.id.manageCars);
+        username = headerView.findViewById(R.id.user_display_name_drawer);
+        manageCars = menu.findItem(R.id.manageCars);
         firebaseDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -104,12 +103,13 @@ ImageView user_profile_image_drawer;
 
             }
         });
-        user_profile_image_drawer = (ImageView)headerView.findViewById(R.id.user_profile_image_drawer);
+        user_profile_image_drawer = headerView.findViewById(R.id.user_profile_image_drawer);
         user_profile_image_drawer.setBackgroundResource(android.R.color.transparent);
-        start_time = (EditText)findViewById(R.id.start_time_edtText);
+        start_time = findViewById(R.id.start_time_edtText);
+        end_time = findViewById(R.id.end_time_edtTxt);
         start_time.setOnClickListener(this);
-        selectdate.setOnClickListener(this);
-        selectTime.setOnClickListener(this);
+        end_time.setOnClickListener(this);
+        COUNTER = 0;
     }
 
 
@@ -171,9 +171,114 @@ ImageView user_profile_image_drawer;
     @Override
     public void onClick(View view) {
         switch(view.getId()){
-            case R.id.start_time_edtText:selectdateandtime.show();break;
-            case R.id.select_date_from_datepicker:
-            case R.id.select_time_from_time_picker:break;
+            case R.id.start_time_edtText:getStartTimeData();break;
+            case R.id.end_time_edtTxt:getEndTimeData();break;
         }
+    }
+//END TIME CODE ------------------------------------------------------------------------------------------------------------
+    private void getEndTimeData() {
+        if(COUNTER==0){
+            Toast.makeText(WelcomeUser.this,"SELECT START TIME FIRST",Toast.LENGTH_SHORT).show();
+        }else {
+            selectdateandtime.show();
+            selectdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                   getEndTimeDate();
+                }
+            });
+
+            selectTime.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                   boolean status =  getEndTimetime();
+                   if(status==true){
+                       end_time.setText(customEndPicker.getFormattedDate());
+                       selectdateandtime.dismiss();
+                   }
+                }
+            });
+        }
+    }
+
+    private void getEndTimeDate() {
+        int day,year,month;
+        day = datePicker.getDayOfMonth();
+        month = datePicker.getMonth();
+        year = datePicker.getYear();
+        GregorianCalendar calendar = new GregorianCalendar(year,month,day);
+        Date d = calendar.getTime();
+        customEndPicker = new EndTime();
+        customEndPicker.store(day,month,year);
+        String date = new SimpleDateFormat("dd-MM-YYYY").format(d).toString();
+        customEndPicker.saveDate(date);
+        Toast.makeText(WelcomeUser.this,"Date selected "+date,Toast.LENGTH_SHORT).show();
+    }
+
+    private boolean getEndTimetime() {
+        int hour,minute;
+        String endDate;
+        endDate = customEndPicker.getDate();
+        hour = timePicker.getHour();
+        minute = timePicker.getMinute();
+        customEndPicker.saveTime(hour,minute);
+        String endtime = customEndPicker.getTime();
+        boolean status = customEndPicker.validate(endDate,endtime,startimeSelecteddate,starttimeselectedtime,WelcomeUser.this);
+        return  status;
+    }
+
+    //START TIME CODE ------------------------------------------------------------------------------------------------------------
+    private void getStartTimeData() {
+    COUNTER = 1;
+    selectdateandtime.show();
+    selectdate.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            getDate();
+        }
+    });
+
+    selectTime.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+
+            Boolean status = getTime();
+            if(status==true){
+                startimeSelecteddate = customPicker.getDate();
+                starttimeselectedtime = customPicker.getTime();
+                start_time.setText(customPicker.getFormattedDate());
+                selectdateandtime.dismiss();
+            }
+
+        }
+    });
+
+    }
+
+
+    private boolean getTime() {
+        int hour,minute;
+        String selectedDate;
+        selectedDate = customPicker.getDate();
+        hour = timePicker.getHour();
+        minute = timePicker.getMinute();
+        customPicker = new StartTime();
+        customPicker.saveTime(hour,minute);
+        String time = customPicker.getTime();
+        Boolean status = customPicker.validate(selectedDate,time,WelcomeUser.this);
+        return  status;
+    }
+
+    private void getDate() {
+    int day,year,month;
+    day = datePicker.getDayOfMonth();
+    month = datePicker.getMonth();
+    year = datePicker.getYear();
+    GregorianCalendar calendar = new GregorianCalendar(year,month,day);
+    Date d = calendar.getTime();
+    customPicker = new StartTime();
+    String date = new SimpleDateFormat("dd-MM-YYYY").format(d).toString();
+    customPicker.saveDate(date);
+    Toast.makeText(WelcomeUser.this,"Date selected "+date,Toast.LENGTH_SHORT).show();
     }
 }
