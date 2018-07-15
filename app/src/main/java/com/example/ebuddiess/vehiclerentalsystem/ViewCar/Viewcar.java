@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.ebuddiess.vehiclerentalsystem.ManageCars.Car;
@@ -27,6 +29,10 @@ public class Viewcar extends AppCompatActivity {
     List<Car> carlist;
     ViewCarAdapter carAdapter;
     String city;
+    Button sitepickup_btn,doorstep_btn;
+    String doorpickuppricingstatus;
+    String startdate,starttime;
+    String enddate,endtime;
     int noofdays;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,10 +43,39 @@ public class Viewcar extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         progressbarLayout = (RelativeLayout)findViewById(R.id.progressbarLayout);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        doorstep_btn = (Button)findViewById(R.id.doorstep_delivery_viewcaractivity);
+        sitepickup_btn = (Button)findViewById(R.id.site_pickup_delivery_button);
         city = getIntent().getStringExtra("city");
-        noofdays = getIntent().getIntExtra("noofdays",0);
-        carlist = new ArrayList<Car>();
+        noofdays  = getIntent().getIntExtra("noofdays",0);
+        startdate = getIntent().getStringExtra("startdate");
+        starttime = getIntent().getStringExtra("starttime");
+        enddate   = getIntent().getStringExtra("enddate");
+        endtime   = getIntent().getStringExtra("endtime");
+        System.out.println("startdate"+startdate);
+        System.out.println("starttime"+starttime);
+        System.out.println("enddate"+enddate);
+        System.out.println("endtime"+endtime);
+        doorpickuppricingstatus = "false";
+        carlist   = new ArrayList<Car>();
         loadCars();
+        sitepickup_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                doorpickuppricingstatus= "false";
+                Toast.makeText(Viewcar.this,"Choose Suitable Location",Toast.LENGTH_LONG).show();
+                carAdapter.setDoorpickingStatus(doorpickuppricingstatus);
+                carAdapter.notifyDataSetChanged();
+            }
+        });
+        doorstep_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                doorpickuppricingstatus = "true";
+                Toast.makeText(Viewcar.this,"500 Rs Charge For Home Deleivery",Toast.LENGTH_LONG).show();
+                carAdapter.setDoorpickingStatus(doorpickuppricingstatus);
+                carAdapter.notifyDataSetChanged();
+            }
+        });
     }
 
     private void loadCars() {
@@ -52,7 +87,7 @@ public class Viewcar extends AppCompatActivity {
                      Car car = ds.getValue(Car.class);
                      carlist.add(car);
                  }
-                 carAdapter = new ViewCarAdapter(carlist,getApplicationContext(),city,noofdays);
+                 carAdapter = new ViewCarAdapter(carlist,getApplicationContext(),city,noofdays,startdate,starttime,enddate,endtime,doorpickuppricingstatus);
                  recyclerView.setAdapter(carAdapter);
                  progressbarLayout.setVisibility(View.GONE);
              }

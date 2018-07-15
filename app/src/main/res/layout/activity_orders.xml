@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".Orders.Orders">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:padding="14dp"
+            android:layout_width="match_parent"
+            android:background="@color/lovelyred"
+            android:layout_height="wrap_content">
+            <TextView
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:textSize="20sp"
+                android:textColor="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="ORDER DETAILS"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="@color/purple"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:padding="10dp"
+                android:textAlignment="center"
+                android:background="@drawable/img_border"
+                android:textSize="20sp"
+                android:textColor="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CAR NAME"
+                android:id="@+id/orderpage_carname"
+                android:layout_marginBottom="7dp"
+                />
+
+            <TextView
+                android:padding="10dp"
+                android:id="@+id/orderpage_carcategory"
+                android:textAlignment="center"
+                android:background="@drawable/img_border"
+                android:textSize="20sp"
+                android:textColor="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CAR CATEGORY"
+                android:layout_marginBottom="7dp"
+                />
+
+            <TextView
+                android:padding="10dp"
+                android:id="@+id/orderpage_startdate"
+                android:textAlignment="center"
+                android:background="@drawable/img_border"
+                android:textSize="20sp"
+                android:textColor="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="START DATE"
+                android:layout_marginBottom="7dp"
+                />
+
+            <TextView
+                android:padding="10dp"
+                android:id="@+id/orderpage_enddate"
+                android:textAlignment="center"
+                android:background="@drawable/img_border"
+                android:textSize="20sp"
+                android:textColor="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="END DATE"
+                android:layout_marginBottom="7dp"
+                />
+
+            <TextView
+                android:padding="10dp"
+                android:id="@+id/orderpage_noofdays"
+                android:textAlignment="center"
+                android:background="@drawable/img_border"
+                android:textSize="20sp"
+                android:textColor="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="NO OF DAYS"
+                android:layout_marginBottom="7dp"
+                />
+
+
+            <TextView
+                android:padding="10dp"
+                android:id="@+id/orderpage_totalprice"
+                android:textAlignment="center"
+                android:background="@drawable/img_border"
+                android:textSize="20sp"
+                android:textColor="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TOTAL PRICE"
+                android:layout_marginBottom="7dp"
+                />
+
+
+            <TextView
+                android:padding="10dp"
+                android:id="@+id/orderpage_carperdayprice"
+                android:textAlignment="center"
+                android:background="@drawable/img_border"
+                android:textSize="20sp"
+                android:textColor="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CAR PER DAY PRICE"
+                android:layout_marginBottom="7dp"
+                />
+
+            <TextView
+                android:id="@+id/orderpage_servicefare"
+                android:padding="10dp"
+                android:textAlignment="center"
+                android:background="@drawable/img_border"
+                android:textSize="20sp"
+                android:textColor="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SERVICE FARE"
+                android:layout_marginBottom="10dp"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+    <RelativeLayout
+        android:weightSum="2"
+        android:background="@color/purple"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="match_parent">
+        <Button
+            android:layout_alignParentBottom="true"
+            android:layout_weight="1"
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CONFIRM"
+            android:textColor="@color/colorWhite"
+            android:id="@+id/confirm_order"
+            android:background="@drawable/view_car_card_view_background"
+            />
+        <Button
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_toRightOf="@+id/confirm_order"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="THINK AGAIN"
+            android:id="@+id/goback_from_orderpage"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/view_car_card_view_background"
+            />
+    </RelativeLayout>
+</LinearLayout>

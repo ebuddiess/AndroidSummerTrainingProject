@@ -41,6 +41,7 @@ import java.util.GregorianCalendar;
 public class WelcomeUser extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 NavigationView user_nav_view;
 FirebaseAuth currentUser;
+String passablestartdate,passableenddate,passablestarttime,passableendtime;
 View headerView;
 DatePicker datePicker;
 TimePicker timePicker;
@@ -168,26 +169,28 @@ int noofdays;String city;
     @Override
     protected void onStart() {
         super.onStart();
-        String uid = currentUser.getUid();
-        DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid());
-        firebaseDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                firstname = dataSnapshot.child("firstname").getValue().toString();
-                if(!firstname.isEmpty()){
-                    String profileurl= dataSnapshot.child("profileurl").getValue().toString();
-                    username.setText("Login as "+firstname);
-                    Glide.with(WelcomeUser.this).load(profileurl).apply(new RequestOptions().centerCrop()).into(user_profile_image_drawer);
-                }else if(firstname.isEmpty()){
-                    username.setText("Log in As User");
-                }
-                }
+       if(currentUser.getCurrentUser()!=null){
+           String uid = currentUser.getUid();
+           DatabaseReference firebaseDatabase = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid());
+           firebaseDatabase.addValueEventListener(new ValueEventListener() {
+               @Override
+               public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                   firstname = dataSnapshot.child("firstname").getValue().toString();
+                   if(!firstname.isEmpty()){
+                       String profileurl= dataSnapshot.child("profileurl").getValue().toString();
+                       username.setText("Login as "+firstname);
+                       Glide.with(getApplicationContext()).load(profileurl).apply(new RequestOptions().centerCrop()).into(user_profile_image_drawer);
+                   }else if(firstname.isEmpty()){
+                       username.setText("Log in As User");
+                   }
+               }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+               @Override
+               public void onCancelled(@NonNull DatabaseError databaseError) {
 
-            }
-        });
+               }
+           });
+       }
     }
 
     @Override
@@ -203,6 +206,10 @@ int noofdays;String city;
         Intent i1 = new Intent(WelcomeUser.this,Viewcar.class);
         i1.putExtra("city",city);
         i1.putExtra("noofdays",noofdays);
+        i1.putExtra("startdate",passablestartdate);
+        i1.putExtra("starttime",passablestarttime);
+        i1.putExtra("enddate",passableenddate);
+        i1.putExtra("endtime",passableendtime);
         startActivity(i1);
     }
 
@@ -224,6 +231,8 @@ int noofdays;String city;
                 public void onClick(View view) {
                    boolean status =  getEndTimetime();
                    if(status==true){
+                       passableenddate = customEndPicker.getDate();
+                       passableendtime = customEndPicker.getTime();
                        end_time.setText(customEndPicker.getFormattedDate());
                        selectdateandtime.dismiss();
                        VALUELOADEDCOUNTER = 2;
@@ -280,6 +289,8 @@ int noofdays;String city;
             if(status==true){
                 startimeSelecteddate = customPicker.getDate();
                 starttimeselectedtime = customPicker.getTime();
+                passablestartdate = startimeSelecteddate;
+                passablestarttime = starttimeselectedtime;
                 start_time.setText(customPicker.getFormattedDate());
                 selectdateandtime.dismiss();
             }
