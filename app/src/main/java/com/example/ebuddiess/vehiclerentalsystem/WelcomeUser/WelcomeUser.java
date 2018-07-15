@@ -9,10 +9,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TabHost;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -24,6 +26,7 @@ import com.example.ebuddiess.vehiclerentalsystem.Authentication.Signin;
 import com.example.ebuddiess.vehiclerentalsystem.ManageCars.ManageCar;
 import com.example.ebuddiess.vehiclerentalsystem.ManageProfile.ManageProfile;
 import com.example.ebuddiess.vehiclerentalsystem.R;
+import com.example.ebuddiess.vehiclerentalsystem.ViewCar.Viewcar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -44,19 +47,22 @@ TimePicker timePicker;
 TextView username;
 Dialog selectdateandtime;
 StartTime customPicker;
+Spinner choosecityspinner;
 String firstname;
 Menu menu;
 String isAdmin;
 Button selectdate,selectTime;
-int COUNTER;
+int COUNTER,VALUELOADEDCOUNTER;
 EditText start_time,end_time;
 DatabaseReference firebaseDatabase;
 MenuItem manageCars;
 TabHost tabHost;
+Button viewcar;
 EndTime customEndPicker;
 String startimeSelecteddate,starttimeselectedtime;
 TabHost.TabSpec spec;
 ImageView user_profile_image_drawer;
+int noofdays;String city;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,6 +116,22 @@ ImageView user_profile_image_drawer;
         start_time.setOnClickListener(this);
         end_time.setOnClickListener(this);
         COUNTER = 0;
+        viewcar = findViewById(R.id.viewcar);
+        viewcar.setOnClickListener(this);
+        VALUELOADEDCOUNTER = 0;
+        choosecityspinner = (Spinner)findViewById(R.id.choose_city_spinner);
+        noofdays = 0;
+        choosecityspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+              city = choosecityspinner.getSelectedItem().toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 
 
@@ -173,9 +195,18 @@ ImageView user_profile_image_drawer;
         switch(view.getId()){
             case R.id.start_time_edtText:getStartTimeData();break;
             case R.id.end_time_edtTxt:getEndTimeData();break;
+            case R.id.viewcar:loadViewcar();
         }
     }
-//END TIME CODE ------------------------------------------------------------------------------------------------------------
+
+    private void loadViewcar() {
+        Intent i1 = new Intent(WelcomeUser.this,Viewcar.class);
+        i1.putExtra("city",city);
+        i1.putExtra("noofdays",noofdays);
+        startActivity(i1);
+    }
+
+    //END TIME CODE ------------------------------------------------------------------------------------------------------------
     private void getEndTimeData() {
         if(COUNTER==0){
             Toast.makeText(WelcomeUser.this,"SELECT START TIME FIRST",Toast.LENGTH_SHORT).show();
@@ -195,6 +226,7 @@ ImageView user_profile_image_drawer;
                    if(status==true){
                        end_time.setText(customEndPicker.getFormattedDate());
                        selectdateandtime.dismiss();
+                       VALUELOADEDCOUNTER = 2;
                    }
                 }
             });
@@ -224,12 +256,14 @@ ImageView user_profile_image_drawer;
         customEndPicker.saveTime(hour,minute);
         String endtime = customEndPicker.getTime();
         boolean status = customEndPicker.validate(endDate,endtime,startimeSelecteddate,starttimeselectedtime,WelcomeUser.this);
+        noofdays = customEndPicker.getnoofdays();
         return  status;
     }
 
     //START TIME CODE ------------------------------------------------------------------------------------------------------------
     private void getStartTimeData() {
-    COUNTER = 1;
+        VALUELOADEDCOUNTER =1;
+        COUNTER = 1;
     selectdateandtime.show();
     selectdate.setOnClickListener(new View.OnClickListener() {
         @Override

@@ -11,6 +11,7 @@ import java.util.GregorianCalendar;
 public class EndTime {
     int day,month,year;
     Context context;
+    int no_of_days;
     String endDate;
     String endtime;
     SimpleDateFormat hourformat;
@@ -54,9 +55,9 @@ public class EndTime {
         try {
             Date startDatedata = dateFormat.parse(startDate);
             Date endDatedata   = dateFormat.parse(endDate);
+            no_of_days = (int) ((endDatedata.getTime()-startDatedata.getTime())/(24*60*60*1000));
             Date starttimedata = hourformat.parse(starttime);
             Date endtimedata  =  hourformat.parse(endtime);
-
             if(endDatedata.equals(startDatedata)){
                 Toast.makeText(context,"NO BOOKING FOR SAME DATE",Toast.LENGTH_LONG).show();
             }else if(endDatedata.before(startDatedata)){
@@ -71,5 +72,9 @@ public class EndTime {
             e.printStackTrace();
         }
         return  status;
+    }
+
+    int getnoofdays(){
+       return  no_of_days;
     }
 }

@@ -4,6 +4,9 @@
     <string name="logout">Logout</string>
     <string name="about">About</string>
     <string name="manage_cars">Manage Cars</string>
+    <string name="fuel_type">Fuel Type</string>
+    <string name="car_category">Car Category</string>
+    <string name="seating_capacity">Seating Capacity</string>
     <array name="car_category">
         <item>CAR CATEGORY</item>
         <item>Hatchback</item>
@@ -15,6 +18,13 @@
         <item>PETROL</item>
         <item>DIESEL</item>
         <item>CNG</item>
+    </array>
+
+    <array name="delhicities">
+        <item>CHOOSE LOCATION</item>
+        <item>Rajiv Chowk</item>
+        <item>Badarpur</item>
+        <item>Vasant Kunj</item>
     </array>
 
     <array name="city">

@@ -9,7 +9,9 @@ public class Car {
     int seating_capcaity;
     String uploadedby;
     int pricing;
+    Car(){
 
+    }
     public Car(String carid, String carName, String car_image_url, String car_category, String fuelType, int seating_capcaity, String uploadedby, int pricing) {
         this.carid = carid;
         this.carName = carName;

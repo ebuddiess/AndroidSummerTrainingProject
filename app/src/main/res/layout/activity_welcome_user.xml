@@ -38,10 +38,12 @@
                     android:textColor="@color/colorBlack"
                     android:textAlignment="center"
                     />
+
                 <Spinner
-                    android:layout_marginTop="6dp"
                     android:entries="@array/city"
+                    android:layout_marginTop="6dp"
                     android:padding="10dp"
+                    android:id="@+id/choose_city_spinner"
                     android:background="@drawable/img_border"
                     android:textAlignment="center"
                     android:layout_width="match_parent"
@@ -105,7 +107,8 @@
               android:layout_marginTop="20dp"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:text="SEARCH CAR"
+              android:text="View CAR"
+              android:id="@+id/viewcar"
               android:textColor="@color/colorWhite"
               android:background="@drawable/search_car_theme"
               />

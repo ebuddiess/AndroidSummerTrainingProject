@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp">
+
+    <android.support.v7.widget.CardView
+        android:elevation="8dp"
+        app:cardBackgroundColor="#3174e7"
+        app:cardCornerRadius="8dp"
+        android:layout_width="match_parent"
+        android:id="@+id/viewcar_cardview"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:padding="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:scaleType="fitCenter"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginRight="20dp"
+                android:src="@drawable/car1"
+                android:id="@+id/car_thumbnail_image_view" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/viewcarcarname_txtview"
+                android:text="CAR NAME"
+                android:textSize="18sp"
+                android:textColor="@color/colorWhite"
+                android:layout_toRightOf="@+id/car_thumbnail_image_view"
+                />
+
+            <TextView
+                android:drawablePadding="10dp"
+                android:drawableLeft="@drawable/car_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/view_car_category"
+                android:text="@string/car_category"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/colorWhite"
+                android:layout_below="@+id/viewcarcarname_txtview"
+                android:layout_toRightOf="@id/car_thumbnail_image_view"
+                />
+            <TextView
+                android:drawablePadding="10dp"
+                android:drawableLeft="@drawable/fuel_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/viewcar_fuel_type"
+                android:text="@string/fuel_type"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/colorWhite"
+                android:layout_below="@+id/view_car_category"
+                android:layout_toRightOf="@id/car_thumbnail_image_view"
+                />
+            <TextView
+                android:drawablePadding="10dp"
+                android:drawableLeft="@drawable/fuel_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/viewcar_seating_capactiy"
+                android:text="@string/seating_capacity"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/colorWhite"
+                android:layout_below="@+id/viewcar_fuel_type"
+                android:layout_toRightOf="@id/car_thumbnail_image_view"
+                />
+
+            <TextView
+                android:drawablePadding="10dp"
+                android:drawableLeft="@drawable/fuel_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/price_per_day"
+                android:text="price per day"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:textColor="@color/colorWhite"
+                android:layout_below="@+id/viewcar_seating_capactiy"
+                android:layout_toRightOf="@id/car_thumbnail_image_view"
+                />
+            <Spinner
+                android:background="@drawable/img_border"
+                android:layout_marginTop="4dp"
+                android:spinnerMode="dropdown"
+                android:textAlignment="center"
+                android:padding="3dp"
+                android:theme="@style/spinnertheme"
+                android:layout_width="match_parent"
+                android:id="@+id/choose_site_location"
+                android:layout_below="@+id/price_per_day"
+                android:layout_height="wrap_content">
+            </Spinner>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/choose_site_location"
+                android:text="Book Now"
+                android:id="@+id/viewcar_booknow_btn"
+                android:textColor="@color/colorWhite"
+                android:background="@drawable/view_car_card_view_background"
+                android:layout_marginTop="8dp"
+                android:layout_centerHorizontal="true"
+                />
+        </RelativeLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
