@@ -17,6 +17,14 @@ public class User {
         profileurl = "";
     }
 
+    public String getAdminPower() {
+        return adminPower;
+    }
+
+    public void setAdminPower(String adminPower) {
+        this.adminPower = adminPower;
+    }
+
     public String getFirstname() {
         return firstname;
     }

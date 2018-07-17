@@ -251,7 +251,7 @@ int noofdays;String city;
         Date d = calendar.getTime();
         customEndPicker = new EndTime();
         customEndPicker.store(day,month,year);
-        String date = new SimpleDateFormat("dd-MM-YYYY").format(d).toString();
+        String date = new SimpleDateFormat("dd-MM-yyyy").format(d).toString();
         customEndPicker.saveDate(date);
         Toast.makeText(WelcomeUser.this,"Date selected "+date,Toast.LENGTH_SHORT).show();
     }
@@ -322,7 +322,7 @@ int noofdays;String city;
     GregorianCalendar calendar = new GregorianCalendar(year,month,day);
     Date d = calendar.getTime();
     customPicker = new StartTime();
-    String date = new SimpleDateFormat("dd-MM-YYYY").format(d).toString();
+    String date = new SimpleDateFormat("dd-MM-yyyy").format(d).toString();
     customPicker.saveDate(date);
     Toast.makeText(WelcomeUser.this,"Date selected "+date,Toast.LENGTH_SHORT).show();
     }

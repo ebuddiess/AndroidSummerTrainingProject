@@ -39,5 +39,6 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
     implementation 'com.android.support:design:27.1.1'
     implementation 'com.android.support:cardview-v7:27.1.1'
+    implementation 'com.balsikandar.android:crashreporter:1.0.9'
 }
 apply plugin: 'com.google.gms.google-services'

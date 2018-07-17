@@ -30,7 +30,6 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
     EditText email_txt,pwd_txt,secretcode,mobile_no;
     DatabaseReference databaseReference;
     FirebaseAuth firebaseAuth;
-    String isAdmin;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,7 +59,7 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
         String phoneno_txt = mobile_no.getText().toString();
         String secretcode_txt = secretcode.getText().toString();
         int pwdlength = passwordtxt.length();
-        isAdmin = "false";
+        String isAdmin = "false";
         /* checking if values are empty or not */
          if(secretcode_txt.equals("123")){
             isAdmin = "true";
@@ -83,19 +82,19 @@ public class Signup extends AppCompatActivity implements View.OnClickListener {
 
     }
 
-    private void createNewUser(String emailAdresstxt, String passwordtxt, final String phoneno_text, final String isAdmin) {
+    private void createNewUser(String emailAdresstxt, String passwordtxt, final String phoneno_text, final String isAdmin_txt) {
       firebaseAuth.createUserWithEmailAndPassword(emailAdresstxt,passwordtxt).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+
           @Override
           public void onComplete(@NonNull Task<AuthResult> task) {
-            String phoneno=phoneno_text;
             if(task.isSuccessful()){
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 String userid = user.getUid();
-                newuser = new User(phoneno,user.getEmail(),userid,isAdmin);
+                newuser = new User(phoneno_text,user.getEmail(),userid,isAdmin_txt);
                 databaseReference.child(userid).setValue(newuser);
                 Toast.makeText(Signup.this,"Registered Sucesfully",LENGTH_LONG).show();
                 finish();
-                startActivity(new Intent(Signup.this,Signin.class).putExtra("isAdmin",isAdmin));
+                startActivity(new Intent(Signup.this,Signin.class).putExtra("isAdmin",isAdmin_txt));
             }else{
                 if(task.getException() instanceof FirebaseAuthUserCollisionException){
                     Toast.makeText(Signup.this,"Already Registered", LENGTH_LONG).show();

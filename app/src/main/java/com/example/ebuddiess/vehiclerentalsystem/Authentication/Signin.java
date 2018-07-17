@@ -37,7 +37,7 @@ EditText email_txt,pwd_txt;
 ProgressBar progressBar;
 DatabaseReference databaseReference;
 FirebaseAuth currentUser;
-
+String isAdminfromIntent="false";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,29 +52,6 @@ FirebaseAuth currentUser;
         currentUser = FirebaseAuth.getInstance();
         signup.setOnClickListener(this);
         login.setOnClickListener(this);
-
-        if(currentUser.getCurrentUser()!=null){
-            databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(currentUser.getUid());
-            databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    String isAdmin =  dataSnapshot.child("adminPower").getValue().toString();
-                    if(isAdmin==null){
-                        String isAdminfromIntent = getIntent().getStringExtra("isAdmin");
-                        Map<String,Object> taskMap = new HashMap<String,Object>();
-                        taskMap.put("adminPower",isAdminfromIntent);
-                        databaseReference.updateChildren(taskMap);
-                        Toast.makeText(Signin.this,"Admin Created", LENGTH_LONG).show();
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                }
-            });
-        }
-
     }
 
     @Override
@@ -82,7 +59,7 @@ FirebaseAuth currentUser;
         super.onStart();
         if(currentUser.getCurrentUser()!=null){
             finish();
-            startActivity(new Intent(Signin.this,WelcomeUser.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+            startActivity(new Intent(Signin.this,WelcomeUser.class));
         }
     }
 

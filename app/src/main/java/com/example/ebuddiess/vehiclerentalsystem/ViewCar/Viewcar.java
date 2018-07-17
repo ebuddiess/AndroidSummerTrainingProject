@@ -87,7 +87,7 @@ public class Viewcar extends AppCompatActivity {
                      Car car = ds.getValue(Car.class);
                      carlist.add(car);
                  }
-                 carAdapter = new ViewCarAdapter(carlist,getApplicationContext(),city,noofdays,startdate,starttime,enddate,endtime,doorpickuppricingstatus);
+                 carAdapter = new ViewCarAdapter(carlist,Viewcar.this,city,noofdays,startdate,starttime,enddate,endtime,doorpickuppricingstatus);
                  recyclerView.setAdapter(carAdapter);
                  progressbarLayout.setVisibility(View.GONE);
              }
