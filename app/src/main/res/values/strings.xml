@@ -27,6 +27,13 @@
         <item>Vasant Kunj</item>
     </array>
 
+    <array name="carcity">
+        <item>SELECT CITY</item>
+        <item>Delhi</item>
+        <item>Mumbai</item>
+    </array>
+
+
     <array name="city">
         <item>Delhi</item>
         <item>Mumbai</item>

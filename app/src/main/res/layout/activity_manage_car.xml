@@ -7,13 +7,25 @@
     android:orientation="vertical"
     tools:context=".ManageCars.ManageCar">
 
-    <ImageView
-        android:padding="2dp"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:src="@drawable/car2"
-        android:id="@+id/car_image"
-        />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:scaleType="fitCenter"
+            android:padding="1dp"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:src="@drawable/car2"
+            android:id="@+id/car_image"
+            />
+        <ProgressBar
+            android:visibility="invisible"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/car_image_upload_progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -87,6 +99,20 @@
             android:textColor="@color/colorBlack"
             android:layout_marginBottom="8dp"
             android:id="@+id/car_seat_price"
+            />
+
+        <Spinner
+            android:entries="@array/carcity"
+            android:background="@drawable/car_edittext_background"
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:textSize="20sp"
+            android:textAlignment="center"
+            android:textColorHint="@color/colorBlack"
+            android:layout_height="wrap_content"
+            android:hint="CAR CITY"
+            android:layout_marginBottom="8dp"
+            android:id="@+id/car_city"
             />
 
         <Button

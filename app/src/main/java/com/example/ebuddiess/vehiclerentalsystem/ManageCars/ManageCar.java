@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +27,7 @@ import com.google.firebase.storage.UploadTask;
 
 public class ManageCar extends AppCompatActivity implements AdapterView.OnItemSelectedListener, View.OnClickListener {
     Button select_car_image, save_car_data;
-    Spinner fuelType, car_category;
+    Spinner fuelType, car_category,car_city;
     EditText carname;
     Uri carimageuri,car_image_download_url;
     String imagename;
@@ -34,9 +35,10 @@ public class ManageCar extends AppCompatActivity implements AdapterView.OnItemSe
     FirebaseAuth currentuser;
     StorageReference storageReference;
     DatabaseReference databaseReference;
-    String fuel_type_txt;
+    String fuel_type_txt,selected_car_city;
     ImageView car_image;
     int PRICE_PER_DAY;
+    ProgressBar car_upload_indicator_progressbar;
     int SEATING_CAPACTIY_CAR;
     TextView car_pricing, seating_capacity;
 
@@ -49,13 +51,16 @@ public class ManageCar extends AppCompatActivity implements AdapterView.OnItemSe
         fuelType = (Spinner) findViewById(R.id.fuel_type);
         car_category = (Spinner) findViewById(R.id.car_category);
         car_image = (ImageView)findViewById(R.id.car_image);
+        car_city = (Spinner)findViewById(R.id.car_city);
         car_pricing = (TextView) findViewById(R.id.car_seat_price);
         seating_capacity = (TextView) findViewById(R.id.seating_capactiy);
         carname = (EditText) findViewById(R.id.car_name);
         currentuser = FirebaseAuth.getInstance();
+        car_upload_indicator_progressbar = (ProgressBar)findViewById(R.id.car_image_upload_progressbar);
         databaseReference = FirebaseDatabase.getInstance().getReference("Cars");
         car_category.setOnItemSelectedListener(this);
         fuelType.setOnItemSelectedListener(this);
+        car_city.setOnItemSelectedListener(this);
         select_car_image.setOnClickListener(this);
         save_car_data.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,10 +74,19 @@ public class ManageCar extends AppCompatActivity implements AdapterView.OnItemSe
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         Spinner spinner = (Spinner)adapterView;
         switch (spinner.getId()){
-            case R.id.car_category:calculatePricing(i);
-            case R.id.fuel_type:getFuelType(i);
+            case R.id.car_category:calculatePricing(i);break;
+            case R.id.fuel_type:getFuelType(i);break;
+            case R.id.car_city:getCarCity(i);break;
         }
 
+    }
+
+    private void getCarCity(int i) {
+        if(i==1){
+            selected_car_city = "Delhi";
+        }else if(i==2){
+            selected_car_city = "Mumbai";
+        }
     }
 
     private void getFuelType(int i) {
@@ -120,6 +134,7 @@ public class ManageCar extends AppCompatActivity implements AdapterView.OnItemSe
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==123&&resultCode==RESULT_OK && data!=null &&data.getData()!=null) {
             carimageuri = data.getData();
+            car_upload_indicator_progressbar.setVisibility(View.VISIBLE);
             imagename = "car"+carname.getText().toString()+System.currentTimeMillis()+ ".jpeg";
             storageReference = FirebaseStorage.getInstance().getReference("CarImages/"+imagename);
             Toast.makeText(ManageCar.this,"Uploading Please wait ......",Toast.LENGTH_LONG).show();
@@ -132,9 +147,11 @@ public class ManageCar extends AppCompatActivity implements AdapterView.OnItemSe
                       car_image_download_url = uri;
                       String carname_txt = carname.getText().toString();
                       String carid = databaseReference.push().getKey();
-                      Car newcar = new Car(carid,carname_txt,car_image_download_url.toString(),selectedCarCategory,fuel_type_txt,SEATING_CAPACTIY_CAR,currentuser.getUid(),PRICE_PER_DAY);
+                      Car newcar = new Car(carid,carname_txt,car_image_download_url.toString(),selectedCarCategory,fuel_type_txt,SEATING_CAPACTIY_CAR,currentuser.getUid(),PRICE_PER_DAY,selected_car_city);
                       databaseReference.child(carid).setValue(newcar);
                       Glide.with(ManageCar.this).load(car_image_download_url).apply(new RequestOptions().centerCrop()).into(car_image);
+                      car_upload_indicator_progressbar.setVisibility(View.INVISIBLE);
+                      Toast.makeText(ManageCar.this,"Uploaded Sucesfully......",Toast.LENGTH_LONG).show();
                       }
                   });
                 }

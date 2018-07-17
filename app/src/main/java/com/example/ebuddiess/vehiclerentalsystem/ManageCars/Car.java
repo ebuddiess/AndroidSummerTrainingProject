@@ -9,10 +9,12 @@ public class Car {
     int seating_capcaity;
     String uploadedby;
     int pricing;
+    String carcity;
     Car(){
 
     }
-    public Car(String carid, String carName, String car_image_url, String car_category, String fuelType, int seating_capcaity, String uploadedby, int pricing) {
+
+    public Car(String carid, String carName, String car_image_url, String car_category, String fuelType, int seating_capcaity, String uploadedby, int pricing, String carcity) {
         this.carid = carid;
         this.carName = carName;
         this.car_image_url = car_image_url;
@@ -21,6 +23,7 @@ public class Car {
         this.seating_capcaity = seating_capcaity;
         this.uploadedby = uploadedby;
         this.pricing = pricing;
+        this.carcity = carcity;
     }
 
     public String getCarid() {
@@ -85,5 +88,13 @@ public class Car {
 
     public void setPricing(int pricing) {
         this.pricing = pricing;
+    }
+
+    public String getCarcity() {
+        return carcity;
+    }
+
+    public void setCarcity(String carcity) {
+        this.carcity = carcity;
     }
 }
