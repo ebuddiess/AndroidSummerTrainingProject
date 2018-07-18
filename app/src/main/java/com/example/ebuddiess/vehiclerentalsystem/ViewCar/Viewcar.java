@@ -84,8 +84,10 @@ public class Viewcar extends AppCompatActivity {
              public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
               carlist.clear();
                  for (DataSnapshot ds : dataSnapshot.getChildren()) {
-                     Car car = ds.getValue(Car.class);
-                     carlist.add(car);
+                    if(ds.getValue().toString().contains(city)){
+                        Car car = ds.getValue(Car.class);
+                        carlist.add(car);
+                    }
                  }
                  carAdapter = new ViewCarAdapter(carlist,Viewcar.this,city,noofdays,startdate,starttime,enddate,endtime,doorpickuppricingstatus);
                  recyclerView.setAdapter(carAdapter);
