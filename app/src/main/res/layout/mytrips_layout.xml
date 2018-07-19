@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:background="@drawable/mytrip_background"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp">
+    <RelativeLayout
+        android:background="#2285ff"
+        android:padding="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:scaleType="fitCenter"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="20dp"
+            android:src="@drawable/car1"
+            android:id="@+id/mytrip_image_view" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mytripcarname_txtview"
+            android:text="CAR NAME"
+            android:textSize="20sp"
+            android:textColor="@color/colorWhite"
+            android:layout_toRightOf="@+id/mytrip_image_view"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Car Name"
+            android:id="@+id/mytrip_carnamelabel"
+            android:layout_marginLeft="5dp"
+            android:textSize="10sp"
+           android:layout_toRightOf="@id/mytrip_image_view"
+            android:textColor="@color/colorWhite"
+            android:layout_below="@id/mytripcarname_txtview"
+            />
+        <TextView
+            android:layout_below="@id/mytrip_carnamelabel"
+            android:layout_marginTop="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mytripstartdate_txtview"
+            android:text="START DATE"
+            android:textSize="20sp"
+            android:textColor="@color/colorWhite"
+            android:layout_toRightOf="@+id/mytrip_image_view"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="START DATE"
+            android:layout_marginLeft="5dp"
+            android:textSize="10sp"
+            android:id="@+id/mytripstartdatelabel"
+            android:layout_toRightOf="@id/mytrip_image_view"
+            android:textColor="@color/colorWhite"
+            android:layout_below="@id/mytripstartdate_txtview"
+            />
+
+        <TextView
+            android:layout_marginTop="4dp"
+            android:layout_below="@id/mytripstartdatelabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mytripenddate_txtview"
+            android:text="END DATE"
+            android:textSize="20sp"
+            android:textColor="@color/colorWhite"
+            android:layout_toRightOf="@+id/mytrip_image_view"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="END DATE"
+            android:layout_marginLeft="5dp"
+            android:textSize="10sp"
+            android:id="@+id/mytripenddatelabel"
+            android:layout_toRightOf="@id/mytrip_image_view"
+            android:textColor="@color/colorWhite"
+            android:layout_below="@id/mytripenddate_txtview"
+            />
+        <Button
+            android:textSize="10sp"
+            android:text="MORE"
+            android:textColor="@color/colorWhite"
+            android:background="@color/lovelyred"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="80dp"
+            android:layout_toRightOf="@id/mytripstartdatelabel"
+            android:id="@+id/mytrip_showmore"
+            android:layout_width="90dp"
+            android:layout_height="40dp" />
+        <TextView
+            android:layout_marginTop="18dp"
+            android:layout_below="@id/mytripenddate_txtview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mytripcarcity_txtview"
+            android:text="CAR CITY"
+            android:textSize="20sp"
+            android:textColor="@color/colorWhite"
+            android:layout_toRightOf="@+id/mytrip_image_view"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CAR CITY"
+            android:layout_marginLeft="5dp"
+            android:textSize="10sp"
+            android:id="@+id/mytripcarcitylabel"
+            android:layout_toRightOf="@id/mytrip_image_view"
+            android:textColor="@color/colorWhite"
+            android:layout_below="@id/mytripcarcity_txtview"
+            />
+    </RelativeLayout>
+    <RelativeLayout
+        android:padding="10dp"
+        android:background="@color/purple"
+        android:layout_below="@+id/mytripcarcitylabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/mytripbookedbylabel"
+            android:text="BOOKED BY:"
+            android:textSize="12sp"
+            android:textColor="@color/colorWhite"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DISPLAY NAME"
+            android:textSize="15sp"
+            android:id="@+id/mytripbookedbytxtview"
+            android:textColor="@color/colorWhite"
+            android:layout_below="@id/mytripbookedbylabel"
+            />
+    </RelativeLayout>
+</LinearLayout>

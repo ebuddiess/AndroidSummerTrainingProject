@@ -43,7 +43,9 @@
         <activity android:name=".ManageProfile.ManageProfile" />
         <activity android:name=".ManageCars.ManageCar" />
         <activity android:name=".ViewCar.Viewcar" />
-        <activity android:name=".Orders.Orders"></activity>
+        <activity android:name=".Orders.Orders" />
+        <activity android:name=".MyTrips.Mytrips" />
+        <activity android:name=".MyTrips.TripDetails"></activity>
     </application>
 
 </manifest>

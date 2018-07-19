@@ -10,6 +10,7 @@ public class MyOrderDetailsDatabase {
      String startdate;
      String starttime;
      String enddate;
+     String carurl;
     String endttime;
     int noofdays;
     int totalprice;
@@ -17,8 +18,8 @@ public class MyOrderDetailsDatabase {
     Integer locationprice;
     int doorpickingprice;
     String selectedcity;
-
-    public MyOrderDetailsDatabase(String orderid, String carid, String carname, String carcategory, String userid, String startdate, String starttime, String enddate, String endttime, int noofdays, int totalprice, int carperdayprice, Integer locationprice, int doorpickingprice, String selectedcity) {
+    String carcity;
+    public MyOrderDetailsDatabase(String orderid, String carid, String carname, String carcategory, String userid, String startdate, String starttime, String enddate, String endttime, int noofdays, int totalprice, int carperdayprice, Integer locationprice, int doorpickingprice, String selectedcity,String carcity,String carurl) {
         this.orderid = orderid;
         this.carid = carid;
         this.carname = carname;
@@ -34,6 +35,24 @@ public class MyOrderDetailsDatabase {
         this.locationprice = locationprice;
         this.doorpickingprice = doorpickingprice;
         this.selectedcity = selectedcity;
+        this.carcity = carcity;
+        this.carurl = carurl;
+    }
+
+    public String getCarurl() {
+        return carurl;
+    }
+
+    public void setCarurl(String carurl) {
+        this.carurl = carurl;
+    }
+
+    public String getCarcity() {
+        return carcity;
+    }
+
+    public void setCarcity(String carcity) {
+        this.carcity = carcity;
     }
 
     public String getOrderid() {

@@ -25,6 +25,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.ebuddiess.vehiclerentalsystem.Authentication.Signin;
 import com.example.ebuddiess.vehiclerentalsystem.ManageCars.ManageCar;
 import com.example.ebuddiess.vehiclerentalsystem.ManageProfile.ManageProfile;
+import com.example.ebuddiess.vehiclerentalsystem.MyTrips.Mytrips;
 import com.example.ebuddiess.vehiclerentalsystem.R;
 import com.example.ebuddiess.vehiclerentalsystem.ViewCar.Viewcar;
 import com.google.firebase.auth.FirebaseAuth;
@@ -56,7 +57,7 @@ Button selectdate,selectTime;
 int COUNTER,VALUELOADEDCOUNTER;
 EditText start_time,end_time;
 DatabaseReference firebaseDatabase;
-MenuItem manageCars;
+MenuItem manageCars,viewtripadmin,viewtripclient;
 TabHost tabHost;
 Button viewcar;
 EndTime customEndPicker;
@@ -95,6 +96,8 @@ int noofdays;String city;
         menu = user_nav_view.getMenu();
         username = headerView.findViewById(R.id.user_display_name_drawer);
         manageCars = menu.findItem(R.id.manageCars);
+        viewtripadmin = menu.findItem(R.id.viewTripsadmin);
+        viewtripclient = menu.findItem(R.id.viewTrips);
         firebaseDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -102,6 +105,9 @@ int noofdays;String city;
                 if(isAdmin.equals("true")){
 //                    Toast.makeText(WelcomeUser.this,isAdmin,Toast.LENGTH_LONG).show();
                     manageCars.setVisible(true);
+                    viewtripadmin.setVisible(true);
+                }else{
+                    viewtripclient.setVisible(true);
                 }
             }
 
@@ -143,8 +149,14 @@ int noofdays;String city;
             case R.id.logout:doLogout();break;
             case R.id.user_EditProfile:openmanageProfile();break;
             case R.id.manageCars:openmanageCars();break;
+            case R.id.viewTrips:loadTrips();break;
+            case R.id.viewTripsadmin:loadTrips();break;
         }
         return true;
+    }
+
+    private void loadTrips() {
+    startActivity(new Intent(WelcomeUser.this, Mytrips.class).putExtra("isAdmin",isAdmin));
     }
 
     private void openmanageCars() {
