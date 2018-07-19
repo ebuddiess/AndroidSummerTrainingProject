@@ -21,10 +21,10 @@
             android:textColor="@color/colorWhite"
             />
     </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:id="@+id/mytrips_recyclerview"
         android:layout_height="match_parent">
     </android.support.v7.widget.RecyclerView>
-
 </LinearLayout>

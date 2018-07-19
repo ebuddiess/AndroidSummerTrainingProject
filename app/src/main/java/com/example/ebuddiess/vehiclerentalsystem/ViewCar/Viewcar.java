@@ -1,5 +1,6 @@
 package com.example.ebuddiess.vehiclerentalsystem.ViewCar;
 
+import android.app.Dialog;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,16 +18,21 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
-public class Viewcar extends AppCompatActivity {
+public class Viewcar extends AppCompatActivity implements View.OnClickListener {
     RecyclerView recyclerView;
+    Button orderby,filter;
     RelativeLayout progressbarLayout;
     DatabaseReference databaseReference;
     List<Car> carlist;
+    Dialog orderdialog,filterdialog;
     ViewCarAdapter carAdapter;
     String city;
     Button sitepickup_btn,doorstep_btn;
@@ -76,6 +82,14 @@ public class Viewcar extends AppCompatActivity {
                 carAdapter.notifyDataSetChanged();
             }
         });
+        orderby = (Button)findViewById(R.id.car_orderby_btn);
+        filter =(Button)findViewById(R.id.car_filter_btn);
+        orderdialog = new Dialog(this);
+        filterdialog = new Dialog(this);
+        orderdialog.setContentView(R.layout.car_order_by_dialog);
+        orderby.setOnClickListener(this);
+        filterdialog.setContentView(R.layout.carfilterdialog);
+        filter.setOnClickListener(this);
     }
 
     private void loadCars() {
@@ -99,5 +113,87 @@ public class Viewcar extends AppCompatActivity {
 
              }
          });
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()){
+            case R.id.car_orderby_btn:openOrderDialog();break;
+            case R.id.car_filter_btn:openFilterDialog();break;
+        }
+    }
+
+    private void openFilterDialog() {
+        filterdialog.show();
+    }
+
+    private void openOrderDialog() {
+     orderdialog.show();
+     Button close = (Button)orderdialog.findViewById(R.id.orderbyclosebtn);
+     Button orderbycarname = (Button)orderdialog.findViewById(R.id.orderbycarnamebtn);
+     Button orderbypricing = (Button)orderdialog.findViewById(R.id.orderbypricingbtn);
+     orderbypricing.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View view) {
+             Query orderbycarpricing = databaseReference.orderByChild("pricing");
+             orderbycarpricing.addValueEventListener(new ValueEventListener() {
+                 @Override
+                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                     carlist.clear();
+                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                         if(ds.getValue().toString().contains(city)){
+                             Car car = ds.getValue(Car.class);
+                             carlist.add(car);
+                         }
+                     }
+                     carAdapter = new ViewCarAdapter(carlist,Viewcar.this,city,noofdays,startdate,starttime,enddate,endtime,doorpickuppricingstatus);
+                     recyclerView.setAdapter(carAdapter);
+                     carAdapter.notifyDataSetChanged();
+                     orderdialog.dismiss();
+                 }
+
+                 @Override
+                 public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                 }
+             });
+         }
+     });
+
+     close.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View view) {
+             orderdialog.dismiss();
+         }
+     });
+
+     orderbycarname.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View view) {
+             Query orderbycarname = databaseReference.orderByChild("carName");
+             orderbycarname.addValueEventListener(new ValueEventListener() {
+                 @Override
+                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                     carlist.clear();
+                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                         if(ds.getValue().toString().contains(city)){
+                             Car car = ds.getValue(Car.class);
+                             carlist.add(car);
+                         }
+                     }
+                     carAdapter = new ViewCarAdapter(carlist,Viewcar.this,city,noofdays,startdate,starttime,enddate,endtime,doorpickuppricingstatus);
+                     recyclerView.setAdapter(carAdapter);
+                     carAdapter.notifyDataSetChanged();
+                     orderdialog.dismiss();
+                 }
+
+                 @Override
+                 public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                 }
+             });
+         }
+     });
+
     }
 }
