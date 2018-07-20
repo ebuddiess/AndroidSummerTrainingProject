@@ -87,10 +87,15 @@ TextView carname,carcategory,startdate,enddate,noofdays,totalprice,carperdaypric
                 noofdays.setText(dataSnapshot.child("noofdays").getValue().toString());
                 totalprice.setText(dataSnapshot.child("totalprice").getValue().toString());
                 carperdayprice.setText(dataSnapshot.child("carperdayprice").getValue().toString());
-                locationprice.setText(dataSnapshot.child("locationprice").getValue().toString());
+                if(dataSnapshot.child("locationprice").exists()){
+                    picklocation.setText(dataSnapshot.child("selectedcity").getValue().toString());
+                    locationprice.setText(dataSnapshot.child("locationprice").getValue().toString());
+                }else{
+                    picklocation.setText("NONE");
+                    locationprice.setText("0");
+                }
                 doorpickingprice.setText(dataSnapshot.child("doorpickingprice").getValue().toString());
                 carcity.setText(dataSnapshot.child("carcity").getValue().toString());
-                picklocation.setText(dataSnapshot.child("selectedcity").getValue().toString());
                 String status = getStatus(startdatetxt,starttimetxt,enddatetxt,endttimetxt);
                 tripstatus.setText(status);
             }

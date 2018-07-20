@@ -5,7 +5,65 @@
       <map>
         <entry key="imageWizard">
           <value>
-            <PersistentState />
+            <PersistentState>
+              <option name="children">
+                <map>
+                  <entry key="imageAssetPanel">
+                    <value>
+                      <PersistentState>
+                        <option name="children">
+                          <map>
+                            <entry key="launcher">
+                              <value>
+                                <PersistentState>
+                                  <option name="children">
+                                    <map>
+                                      <entry key="backgroundImage">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="scalingPercent" value="74" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
+                                      <entry key="foregroundImage">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="scalingPercent" value="74" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
+                                    </map>
+                                  </option>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="backgroundAssetType" value="COLOR" />
+                                      <entry key="backgroundColor" value="ffffff" />
+                                      <entry key="backgroundLayerName" value="carkingbackgroundlayer" />
+                                      <entry key="foregroundImage" value="C:\Users\eBuddiess\Desktop\WhatsApp Image 2018-07-18 at 3.17.15 PM.svg" />
+                                      <entry key="foregroundLayerName" value="ic_launcher_foreground" />
+                                      <entry key="outputName" value="carkinglauncherlogo" />
+                                      <entry key="previewDensity" value="HIGH" />
+                                    </map>
+                                  </option>
+                                </PersistentState>
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </PersistentState>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </PersistentState>
           </value>
         </entry>
         <entry key="vectorWizard">
@@ -33,12 +91,13 @@
                         </option>
                         <option name="values">
                           <map>
+                            <entry key="assetSourceType" value="FILE" />
                             <entry key="color" value="ff1c21" />
-                            <entry key="height" value="20" />
-                            <entry key="outputName" value="fuel_type" />
+                            <entry key="height" value="1200" />
+                            <entry key="outputName" value="carkinglogo" />
                             <entry key="overrideSize" value="true" />
-                            <entry key="sourceFile" value="C:\Users\eBuddiess" />
-                            <entry key="width" value="20" />
+                            <entry key="sourceFile" value="C:\Users\eBuddiess\Desktop\WhatsApp Image 2018-07-18 at 3.17.15 PM.svg" />
+                            <entry key="width" value="1200" />
                           </map>
                         </option>
                       </PersistentState>

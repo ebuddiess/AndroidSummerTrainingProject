@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -22,8 +25,6 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 public class Viewcar extends AppCompatActivity implements View.OnClickListener {
@@ -84,11 +85,9 @@ public class Viewcar extends AppCompatActivity implements View.OnClickListener {
         });
         orderby = (Button)findViewById(R.id.car_orderby_btn);
         filter =(Button)findViewById(R.id.car_filter_btn);
-        orderdialog = new Dialog(this);
-        filterdialog = new Dialog(this);
+        orderdialog = new Dialog(this,android.R.style.Theme_Black_NoTitleBar_Fullscreen);
         orderdialog.setContentView(R.layout.car_order_by_dialog);
         orderby.setOnClickListener(this);
-        filterdialog.setContentView(R.layout.carfilterdialog);
         filter.setOnClickListener(this);
     }
 
@@ -124,7 +123,53 @@ public class Viewcar extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void openFilterDialog() {
+        filterdialog = new Dialog(this);
+        filterdialog.setContentView(R.layout.carfilterdialog);
+        Button close = filterdialog.findViewById(R.id.filter_closebtn);
+        close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                filterdialog.dismiss();
+            }
+        });
         filterdialog.show();
+        String carcategory;
+        RadioGroup carcategoryradiogroup = filterdialog.findViewById(R.id.filterradiogroupcarcategory);
+        carcategoryradiogroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                switch (i){
+                    case R.id.filter_carcompact:filterCar("compact");break;
+                    case R.id.filter_carhatchback:filterCar("Hatchback");break;
+                    case R.id.filter_carsuv:filterCar("SUV");break;
+                }
+            }
+        });
+    }
+
+    private void filterCar(final String carcategory) {
+     Query query = databaseReference.orderByChild("carcategory");
+     query.addValueEventListener(new ValueEventListener() {
+         @Override
+         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+             carlist.clear();
+             for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                 if(ds.getValue().toString().contains(city) && ds.getValue().toString().contains(carcategory)){
+                     Car car = ds.getValue(Car.class);
+                     carlist.add(car);
+                 }
+             }
+             carAdapter = new ViewCarAdapter(carlist,Viewcar.this,city,noofdays,startdate,starttime,enddate,endtime,doorpickuppricingstatus);
+             recyclerView.setAdapter(carAdapter);
+             carAdapter.notifyDataSetChanged();
+             filterdialog.dismiss();
+         }
+
+         @Override
+         public void onCancelled(@NonNull DatabaseError databaseError) {
+
+         }
+     });
     }
 
     private void openOrderDialog() {

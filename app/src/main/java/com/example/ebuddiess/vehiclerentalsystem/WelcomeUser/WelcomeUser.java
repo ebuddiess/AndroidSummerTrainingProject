@@ -1,6 +1,9 @@
 package com.example.ebuddiess.vehiclerentalsystem.WelcomeUser;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -54,7 +57,7 @@ String firstname;
 Menu menu;
 String isAdmin;
 Button selectdate,selectTime;
-int COUNTER,VALUELOADEDCOUNTER;
+int COUNTER,startdatecounter,enddatecounter;
 EditText start_time,end_time;
 DatabaseReference firebaseDatabase;
 MenuItem manageCars,viewtripadmin,viewtripclient;
@@ -125,7 +128,6 @@ int noofdays;String city;
         COUNTER = 0;
         viewcar = findViewById(R.id.viewcar);
         viewcar.setOnClickListener(this);
-        VALUELOADEDCOUNTER = 0;
         choosecityspinner = (Spinner)findViewById(R.id.choose_city_spinner);
         noofdays = 0;
         choosecityspinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -151,8 +153,21 @@ int noofdays;String city;
             case R.id.manageCars:openmanageCars();break;
             case R.id.viewTrips:loadTrips();break;
             case R.id.viewTripsadmin:loadTrips();break;
+            case R.id.user_about:loadAbout();break;
         }
         return true;
+    }
+
+    private void loadAbout() {
+     final Dialog dialog = new Dialog(this);
+     dialog.setContentView(R.layout.about_altert);
+     dialog.show();
+      dialog.findViewById(R.id.happy_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               dialog.dismiss();
+            }
+        });
     }
 
     private void loadTrips() {
@@ -227,6 +242,7 @@ int noofdays;String city;
 
     //END TIME CODE ------------------------------------------------------------------------------------------------------------
     private void getEndTimeData() {
+        enddatecounter = 0;
         if(COUNTER==0){
             Toast.makeText(WelcomeUser.this,"SELECT START TIME FIRST",Toast.LENGTH_SHORT).show();
         }else {
@@ -247,7 +263,7 @@ int noofdays;String city;
                        passableendtime = customEndPicker.getTime();
                        end_time.setText(customEndPicker.getFormattedDate());
                        selectdateandtime.dismiss();
-                       VALUELOADEDCOUNTER = 2;
+
                    }
                 }
             });
@@ -266,25 +282,33 @@ int noofdays;String city;
         String date = new SimpleDateFormat("dd-MM-yyyy").format(d).toString();
         customEndPicker.saveDate(date);
         Toast.makeText(WelcomeUser.this,"Date selected "+date,Toast.LENGTH_SHORT).show();
+        enddatecounter = 1;
     }
 
     private boolean getEndTimetime() {
-        int hour,minute;
-        String endDate;
-        endDate = customEndPicker.getDate();
-        hour = timePicker.getHour();
-        minute = timePicker.getMinute();
-        customEndPicker.saveTime(hour,minute);
-        String endtime = customEndPicker.getTime();
-        boolean status = customEndPicker.validate(endDate,endtime,startimeSelecteddate,starttimeselectedtime,WelcomeUser.this);
-        noofdays = customEndPicker.getnoofdays();
+        Boolean status = false;
+        if(enddatecounter==1){
+            int hour,minute;
+            String endDate;
+            endDate = customEndPicker.getDate();
+            hour = timePicker.getHour();
+            minute = timePicker.getMinute();
+            customEndPicker.saveTime(hour,minute);
+            String endtime = customEndPicker.getTime();
+            status = customEndPicker.validate(endDate,endtime,startimeSelecteddate,starttimeselectedtime,WelcomeUser.this);
+            noofdays = customEndPicker.getnoofdays();
+        }else{
+            Toast.makeText(WelcomeUser.this,"Date not Selected",Toast.LENGTH_SHORT).show();
+
+        }
+
         return  status;
     }
 
     //START TIME CODE ------------------------------------------------------------------------------------------------------------
     private void getStartTimeData() {
-        VALUELOADEDCOUNTER =1;
         COUNTER = 1;
+        startdatecounter = 0;
     selectdateandtime.show();
     selectdate.setOnClickListener(new View.OnClickListener() {
         @Override
@@ -314,15 +338,20 @@ int noofdays;String city;
 
 
     private boolean getTime() {
-        int hour,minute;
-        String selectedDate;
-        selectedDate = customPicker.getDate();
-        hour = timePicker.getHour();
-        minute = timePicker.getMinute();
-        customPicker = new StartTime();
-        customPicker.saveTime(hour,minute);
-        String time = customPicker.getTime();
-        Boolean status = customPicker.validate(selectedDate,time,WelcomeUser.this);
+        Boolean status = false;
+        if(startdatecounter==1){
+            int hour,minute;
+            String selectedDate;
+            selectedDate = customPicker.getDate();
+            hour = timePicker.getHour();
+            minute = timePicker.getMinute();
+            customPicker = new StartTime();
+            customPicker.saveTime(hour,minute);
+            String time = customPicker.getTime();
+             status = customPicker.validate(selectedDate,time,WelcomeUser.this);
+        }else{
+            Toast.makeText(WelcomeUser.this,"Date not Selected",Toast.LENGTH_SHORT).show();
+        }
         return  status;
     }
 
@@ -337,5 +366,6 @@ int noofdays;String city;
     String date = new SimpleDateFormat("dd-MM-yyyy").format(d).toString();
     customPicker.saveDate(date);
     Toast.makeText(WelcomeUser.this,"Date selected "+date,Toast.LENGTH_SHORT).show();
+    startdatecounter = 1;
     }
 }

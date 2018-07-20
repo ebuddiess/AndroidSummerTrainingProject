@@ -1,74 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:weightSum="3"
-    android:orientation="horizontal"
+<RelativeLayout
+    android:orientation="vertical"
+    android:background="@color/lovelyred"
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
-    <LinearLayout
-        android:background="#27edb2"
-        android:orientation="vertical"
-        android:layout_weight="1"
+    <TextView
+        android:padding="10dp"
+        android:id="@+id/carcategorylabel"
+        android:textColor="@color/colorWhite"
+        android:textSize="20sp"
+        android:background="@color/purple"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <ImageView
-            android:layout_gravity="center"
-            android:src="@drawable/car1"
-            android:layout_width="150dp"
-            android:layout_height="150dp" />
+        android:layout_height="wrap_content"
+        android:text="CAR CATEGORY"
+        />
 
-        <Button
-            android:padding="10dp"
-            android:background="@color/purple"
+    <RadioGroup
+        android:layout_marginTop="4dp"
+        android:layout_below="@+id/carcategorylabel"
+        android:id="@+id/filterradiogroupcarcategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RadioButton
             android:textColor="@color/colorWhite"
-            android:textSize="30sp"
-            android:layout_width="match_parent"
-            android:text="Car Category"
-            android:layout_height="wrap_content"
-            />
-
-
-        <ImageView
-            android:layout_gravity="center"
-            android:src="@drawable/fuel_type"
-            android:layout_width="150dp"
-            android:layout_height="150dp" />
-
-        <Button
-            android:padding="10dp"
-            android:background="@color/purple"
+            android:id="@+id/filter_carhatchback"
+            android:text="HatchBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </RadioButton>
+        <RadioButton
             android:textColor="@color/colorWhite"
-            android:textSize="30sp"
-            android:layout_width="match_parent"
-            android:text="Fuel Type"
-            android:layout_height="wrap_content"
-            />
-
-        <ImageView
-            android:layout_gravity="center"
-            android:src="@drawable/car2"
-            android:layout_width="150dp"
-            android:layout_height="150dp" />
-
-        <Button
-            android:padding="10dp"
-            android:background="@color/purple"
+            android:id="@+id/filter_carsuv"
+            android:text="SUV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </RadioButton>
+        <RadioButton
             android:textColor="@color/colorWhite"
-            android:textSize="30sp"
-            android:layout_width="match_parent"
-            android:text="Seating Capacity"
-            android:layout_height="wrap_content"
-            />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_weight="2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-
-    </LinearLayout>
-
-</LinearLayout>
+            android:id="@+id/filter_carcompact"
+            android:text="Compact"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </RadioButton>
+    </RadioGroup>
+<Button
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="CLOSE"
+    android:id="@+id/filter_closebtn"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="20dp"
+    android:layout_below="@+id/carcategorylabel"
+    android:layout_alignParentRight="true"
+    android:textColor="@color/colorWhite"
+    android:background="@color/purple"
+    />
+</RelativeLayout>

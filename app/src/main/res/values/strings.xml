@@ -20,7 +20,12 @@
         <item>DIESEL</item>
         <item>CNG</item>
     </array>
-
+    <array name="seating">
+        <item>CHOOSE SEATING</item>
+        <item>4</item>
+        <item>6</item>
+        <item>7</item>
+    </array>
     <array name="delhicities">
         <item>CHOOSE LOCATION</item>
         <item>Rajiv Chowk</item>
@@ -39,5 +44,8 @@
         <item>Delhi</item>
         <item>Mumbai</item>
     </array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

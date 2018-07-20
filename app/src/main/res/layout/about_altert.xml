@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:background="@color/purple"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:textColor="@color/colorWhite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="          carKing Credits:"
+        android:textSize="30sp"
+        />
+
+    <TextView
+        android:textColor="@color/colorWhite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:text=" 1.Asif"/>
+    <TextView
+        android:textColor="@color/colorWhite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:text="2.Puneet"/><TextView
+    android:textColor="@color/colorWhite"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="40sp"
+    android:text="3.Kapil"/><TextView
+    android:textColor="@color/colorWhite"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="40sp"
+    android:text="4.Manish"/>
+    <Button
+        android:id="@+id/happy_btn"
+        android:layout_gravity="center"
+        android:textSize="20sp"
+        android:textColor="@color/colorWhite"
+        android:background="@color/lovelyred"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HAPPY"
+        />
+</LinearLayout>
